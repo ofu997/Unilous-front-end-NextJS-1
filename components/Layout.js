@@ -7,6 +7,7 @@ import { useQuery } from '@apollo/react-hooks'
 import NavBar from './navBar/NavBar'
 import { FIND_USER, PENDING_NOTIFS, LIST_OF_NOTIFICATIONS } from '../src/schemas/queries'
 import {bindActionCreators} from 'redux'
+import Head from 'next/head'
 
 const Layout = (props) => {
     if (typeof window === 'undefined') return <h1>Rendering</h1>
@@ -68,6 +69,10 @@ const Layout = (props) => {
     
         return (
             <div className="wrapper">
+                <Head>
+                    <title>Unilous test</title>
+                    <meta name="og:title" content="Unilous test" />
+                </Head>
                 <NavBar query={query} onQueryChange={onQueryChange} />
                 {props.children}
             </div>
