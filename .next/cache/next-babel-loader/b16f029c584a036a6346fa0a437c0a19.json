@@ -1,0 +1,1 @@
+{"ast":null,"code":"import React from 'react';\nconst Layout = props;","map":{"version":3,"sources":["C:/Code/Projects/projectU/projectu/components/Layout.js"],"names":["React","Layout","props"],"mappings":"AAAA,OAAOA,KAAP,MAAkB,OAAlB;AAEA,MAAMC,MAAM,GAAIC,KAAhB","sourcesContent":["import React from 'react'\r\n\r\nconst Layout = (props)"]},"metadata":{},"sourceType":"module"}
