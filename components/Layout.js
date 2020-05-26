@@ -10,7 +10,15 @@ import {bindActionCreators} from 'redux'
 import Head from 'next/head'
 
 const Layout = (props) => {
-    if (typeof window === 'undefined') return <h1>Rendering</h1>
+    if (typeof window === 'undefined') return (
+        <div>
+            <Head>
+                <title>Unilous test</title>
+                <meta name="og:title" content="Unilous test" />
+            </Head>
+            <h1>Rendering</h1>
+        </div>
+    )
     else {
         const [query, setQuery] = useState('')
 
