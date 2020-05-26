@@ -10,21 +10,18 @@ import {bindActionCreators} from 'redux'
 import Head from 'next/head'
 
 const Layout = (props) => {
+    const [query, setQuery] = useState('')
+
+    const onQueryChange = (event) => {
+    setQuery(event.target.value)
+    }
     if (typeof window === 'undefined') return (
-        <div>
-            <Head>
-                <title>Unilous test</title>
-                <meta name="og:title" content="Unilous test" />
-            </Head>
-            <h1>Rendering</h1>
+        <div className="wrapper">
+            <NavBar query={query} onQueryChange={onQueryChange} noUser />
+            {props.children}
         </div>
     )
     else {
-        const [query, setQuery] = useState('')
-
-        const onQueryChange = (event) => {
-        setQuery(event.target.value)
-        }
         if (localStorage.getItem('token') && props.token === null) {
         props.setToken(localStorage.getItem('token'))
         }
@@ -77,10 +74,6 @@ const Layout = (props) => {
     
         return (
             <div className="wrapper">
-                <Head>
-                    <title>Unilous test</title>
-                    <meta name="og:title" content="Unilous test" />
-                </Head>
                 <NavBar query={query} onQueryChange={onQueryChange} />
                 {props.children}
             </div>

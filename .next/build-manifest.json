@@ -27,18 +27,6 @@
     "/index": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
-    ],
-    "/post/[title]": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/results/[searchQuery]": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/user/[username]": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
     ]
   }
 }

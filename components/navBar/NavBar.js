@@ -52,7 +52,61 @@ const NavBar = (props) => {
     }
 
     const menuStyle = menuItemShown ? {borderBottomColor: '#282828'} : null
-    
+    const alertBarStyle = props.alertNotif.color ?
+        {backgroundColor: props.alertNotif.color, color: props.alertNotif.textColor}
+        :
+        {display: 'none', backgroundColor: props.alertNotif.color, color: props.alertNotif.textColor}
+
+    console.log(props.noUser)
+    if (props.noUser) {
+        return (
+            <div>
+                <div className={`${NB.navContainer} HWM`}>
+                    <div className={NB.navBarContainer}>
+                        <Link href="/"  >
+                            <a className={NB.iconContainer}>
+                                <img src="/svg/logo/logoB.svg" alt="icon" className={NB.navBarIcon} />
+                            </a>
+                        </Link>
+                        <div className={NB.searchBar}>
+                            <Link href={linkToPush}  onClick={() => enterQuery()}>
+                                <a className={`neutralize-link ${NB.enterSearch} ${NB.searchHover}`}><img src="/svg/searchW.svg" className={NB.searchIcon} alt="search" /></a>
+                            </Link>
+                            <div className={NB.searchHr} style={{backgroundColor: 'white'}} />
+                            <input value={props.query} className={NB.searchInput} type="text" onChange={(e) => props.onQueryChange(e)} onKeyPress={(e) => handleKeyPress(e)} placeholder="search or enter nothing for all results" />
+                            <div className={NB.SBSeparator} />
+                            <SkillSugg query={props.query} onSuggestionClicked={onSuggestionClicked} />
+                        </div>
+                    </div>
+                    <div className={NB.alertBarContainer} style={alertBarStyle}>
+                        <div className={NB.message}>{props.alertNotif.message}</div>
+                        <h2 onClick={() => props.resetAlert()} className={NB.close}>x</h2>
+                    </div>
+                </div>
+                <div className={`${NB.navContainerM} SWM`}>
+                    <div className={NB.navBarContainerM}>
+                        <Link href="/">
+                            <a className={`${NB.NBBrand} neutralize-link`}>
+                                <img src="/svg/logo/logoB.svg" className={NB.NBLogo} alt="logo" />
+                                <h2>Unilous</h2>
+                            </a>
+                        </Link>
+                        <div className={NB.NBPrimaryUtilities}>
+                            <img src="/svg/searchSB.svg" onClick={() => changeUtility('search')} className={NB.PUSearch} alt="search" />
+                            <div onClick={() => changeUtility('menu')} className={`${NB.PUHamburgerContainer} ${NB.PNContainer}`}>
+                                <img src="/svg/hamburger.svg" className={NB.PUHamburger} alt="menu" />
+                            </div>
+                        </div>
+                    </div>
+                    <div onClick={() => props.resetAlert()} className={NB.alertBarContainer} style={alertBarStyle}>
+                        <div className={NB.message}>{props.alertNotif.message}</div>
+                        <h2 className={NB.close}>x</h2>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+
     const pendingNotifStats = props.currentUser && props.currentUser.pendingNotifications > 0 ?
         [NB.PNBubble, props.currentUser.pendingNotifications] : [null, null]
     
@@ -160,13 +214,8 @@ const NavBar = (props) => {
         return null
     }
     const showWhenSB = utilityShown === 'search' ? {display: 'block'} : {display: 'none'}
-    const alertBarStyle = props.alertNotif.color ?
-        {backgroundColor: props.alertNotif.color, color: props.alertNotif.textColor}
-        :
-        {display: 'none', backgroundColor: props.alertNotif.color, color: props.alertNotif.textColor}
     
 
-    
     return (
         <div>
             <div className={`${NB.navContainer} HWM`}>
