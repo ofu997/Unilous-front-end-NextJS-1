@@ -256,10 +256,10 @@ const PostPage = withRouter((props) => {
             <Head>
                 <title>{currentPost.title} | Unilous</title>
                 <meta property="og:image" content={headImage} key="title" />
-                <meta property="og:title" content={`${currentPost.title} | Unilous`} key="title" />
+                {/* <meta property="og:title" content={`${currentPost.title} | Unilous`} key="title" />
                 <meta property="og:description" content={`${currentPost.description}`} key="description"/>
-                <meta name="twitter:title" content={`${currentPost.title} | Unilous`} key="title"/>
-                <meta name="description" content={`${currentPost.description}`} key="description"/>
+                <meta name="twitter:title" content={`${currentPost.title} | Unilous`} key="title"/> */}
+                <meta name="description" content={`${currentPost.description.slice(0,100)}`} key="description"/>
             </Head>
             <div className="navbar-height" />
             <div className={ppStyle.postPageContainer}>
