@@ -214,7 +214,7 @@ const PostPage = withRouter((props) => {
     const HomeContent = () => {
         return (
             <div className={ppStyle.homeOptions}>
-                <Link href="/results/all">
+                <Link href="/results/[searchQuery]" as="/results/all">
                     <a className={`${ppStyle.homeOption} neutralize-link`} style={{backgroundColor: '#282828'}}>
                         <img src='/svg/searchWW.svg' className={ppStyle.homeOptionIcon} alt="search" />
                         <h3 className={ppStyle.homeOptionText}>browse all</h3>
