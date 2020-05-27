@@ -28,7 +28,7 @@ const NavBar = (props) => {
         else setMenuItemShown(item)
     }
 
-    const linkToPush = `/results/${encodeURIComponent(props.query)}`
+    const linkToPush = props.query ? `/results/${encodeURIComponent(props.query)}` : '/results/all'
     
     const enterQuery = () => {
         Router.push(linkToPush)
@@ -69,7 +69,7 @@ const NavBar = (props) => {
                             </a>
                         </Link>
                         <div className={NB.searchBar}>
-                            <Link href={linkToPush}  onClick={() => enterQuery()}>
+                            <Link href='/results/[searchQuery]' as={linkToPush}  onClick={() => enterQuery()}>
                                 <a className={`neutralize-link ${NB.enterSearch} ${NB.searchHover}`}><img src="/svg/searchW.svg" className={NB.searchIcon} alt="search" /></a>
                             </Link>
                             <div className={NB.searchHr} style={{backgroundColor: 'white'}} />
