@@ -143,9 +143,9 @@ const Results = withRouter((props) => {
         <Layout>
             <Head>
                 <title>Browse for projects in Unilous</title>
-                <meta property="og:title" content="Browse for projects in Unilous" key="title" />
+                {/* <meta property="og:title" content="Browse for projects in Unilous" key="title" />
                 <meta property="og:description" content={`Unilous projects: ${titlesString}.`} key="description" />
-                <meta name="twitter:title" content="Browse for projects in Unilous" key="title"/>
+                <meta name="twitter:title" content="Browse for projects in Unilous" key="title"/> */}
                 <meta name="description" content={`Unilous projects: ${titlesString}.`} key="description"/>
             </Head>
             <div className="home-wrapper">
