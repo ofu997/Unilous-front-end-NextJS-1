@@ -47,15 +47,23 @@ const UserPage = withRouter((props) => {
     }
   }
   const pallette = palletteGenerator("rgb(40,40,40)").colorPallette
-  // console.log('props.currentUser', props.currentUser); 
-  // console.log(typeof props.currentUser)
-  // console.log('props.currentUser.username: ' + props.currentUser.username)
-  // console.log('page username: ' + currentUser.username)
+  
+  const descriptionToShow = () => {
+    const amtOfPosts = currentUser.posts.length
+    let dFinal = `${currentUser.username} `
+    if (amtOfPosts.length) {
+      if (amtOfPosts === 1) dFinal = `has ${amtOfPosts} awesome project that needs a team.`
+      else dFinal = `has ${amtOfPosts} awesome projects that need teams.`
+    }
+    else dFinal = 'is looking fresh and ready to work on a project!'
+
+    return dFinal
+  }
   return (
     <Layout>
       <Head>
         <title>{`${currentUser.username} | Unilous user`}</title>
-        <meta name="description" content={`${currentUser.username} has ${currentUser.posts.length} projects in need of a team team.`} key="description" />
+        <meta name="description" content={descriptionToShow()} key="description" />
       </Head>
       <div className={UP.UPContainer}>
         <div className="navbar-height" style={{gridColumn: '1/3'}} />

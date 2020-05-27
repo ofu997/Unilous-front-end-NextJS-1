@@ -272,10 +272,8 @@ const PostPage = withRouter((props) => {
         <Layout>
             <Head>
                 <title>Unilous</title>
-                <meta property="og:title" content="Unilous" key="title" />
-                <meta property="og:description" content="Share a project, build a team, make it awesome!" key="description" />
-                <meta name="twitter:title" content="Unilous" key="title"/>
-                <meta name="description" content="Share a project, build a team, make it awesome!" key="description"/>
+                <meta property="og:image" content="https://i.imgur.com/d6bsnRx.png" key="title" />
+                <meta name="description" content="Looking to join or make a team, Unilous will help you make it happen! Join our skilled community of people looking to make something great." key="description"/>
             </Head>
             <div className="navbar-height" />
             <div className={ppStyle.postPageContainer}>

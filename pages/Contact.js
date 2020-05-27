@@ -16,11 +16,7 @@ const Contact = (props) => {
         <Layout>
             <Head>
                 <title>Contact | Unilous</title>
-                <meta property="og:image" content="https://i.imgur.com/6z9eNzV.png" />
-                <meta property="og:title" content="Contact | Unilous" key="title" />
-                <meta name="description" key="description" content="Contact the Unilous team" />
-                <meta property="og:description" key="description" content="Contact the Unilous team" key="og-description" />
-                <meta name="twitter:title" content="Contact the Unilous team" key="twitter-title"/>
+                <meta name="description" content="Contact the Unilous team." key="description" />
             </Head>            
             <div className="navbar-height" />
             <div className={contStyle.contactsContainer}>

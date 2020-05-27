@@ -270,10 +270,7 @@ let PostFormPage = (props) => {
         <Layout>
             <Head>
                 <title>Add project | Unilous</title>
-                <meta property="og:title" content="Add project | Unilous" key="title" />
-                <meta property="og:description" content="Share your project or idea to attract possible team members." key="description" />
-                <meta name="twitter:title" content="Add project | Unilous" key="title"/>
-                <meta name="description" content="Share your project or idea to attract possible team members." key="description"/>
+                <meta name="description" content="Pitch your project to attract others and build your team." key="description"/>
             </Head>            
             <div className="post-form0-container">
                 <div className="navbar-height" />

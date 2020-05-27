@@ -1,4 +1,6 @@
 Do next (now)
+    eliminate load from user projects
+
     make sure posts are loaded before
     make sure Post links are done correctly
     make sure head description works

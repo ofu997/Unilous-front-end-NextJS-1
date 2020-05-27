@@ -70,7 +70,7 @@ const Results = withRouter((props) => {
     const postsSearched = postChangeConditions(SPQuery.data, props.posts) ?
         SPQuery.data.searchPosts : null
     useEffect(() => {
-        if (props.initialPosts.length && !props.posts) {
+        if (!props.posts) {
             props.addPosts(props.initialPosts)
         }
         if (postsSearched && props.posts) {
@@ -138,20 +138,33 @@ const Results = withRouter((props) => {
     )
     const eventsContainerClass = props.eventSearch ? resStyle.ECActive : null
     const showLoading = moreResults() ? <Loading /> : <h3 style={{opacity: '0.8'}}>no more posts</h3>
-    const titlesString = postsArray.map(p => p.title).join(', ')
+    const titlesString = postsArray ? postsArray.map(p => p.title).join(', ') : []
+
+    const descriptionToShow = () => {
+        const start = decodeURIComponent(props.router.query.searchQuery) === 'all' ? 'Unilous projects: ' : `Unilous projects found for "${decodeURIComponent(props.router.query.searchQuery)}": ` 
+        if (!postsArray) return start + 'No projects found. Be the first!'
+        const titlesArray = postsArray.map(p => p.title)
+        let dFinal = start
+        for (const title of titlesArray) {
+            if (dFinal.concat(title).length < 155) {
+                if (dFinal === start) dFinal = [dFinal, title].join('')
+                else dFinal = [dFinal, title].join(', ')
+            }
+            else dFinal = dFinal + ' ...'
+        }
+        if (dFinal.length < 50) dFinal = [dFinal, titlesArray[0].slice(0,95) + ' ...'].join('')
+
+        return dFinal
+    }
     return (
         <Layout>
             <Head>
                 <title>Browse for projects in Unilous</title>
-                {/* <meta property="og:title" content="Browse for projects in Unilous" key="title" />
-                <meta property="og:description" content={`Unilous projects: ${titlesString}.`} key="description" />
-                <meta name="twitter:title" content="Browse for projects in Unilous" key="title"/> */}
-                <meta name="description" content="hello" key="description"/>
-                {/* <meta name="description" content={`Unilous projects: ${titlesString}.`} key="description"/> */}
+                <meta name="description" content={descriptionToShow()} key="description"/>
             </Head>
             <div className="home-wrapper">
                 <div className={resStyle.resultsContainer}>
-                    <Link href="/PostFormPage" >
+                    <Link href="/postformpage" >
                         <a className={`${resStyle.formContainerExpand} standard-hover neutralize-link`} title="add post">
                             <img className={resStyle.formExpandIcon} src="/svg/plusW.svg" alt="team up" />
                         </a>

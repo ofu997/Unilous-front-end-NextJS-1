@@ -24,11 +24,31 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
+    "/contact": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/index": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
+    "/next/dist/pages/_error": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/post/[title]": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/postformpage": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
     "/results/[searchQuery]": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/user/[username]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
