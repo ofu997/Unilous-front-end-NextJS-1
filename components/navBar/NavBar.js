@@ -140,15 +140,15 @@ const NavBar = (props) => {
     
                 return (
                     <div className={NB.navBarSubContainerM} style={menuStyle}>
-                        <Link href="/post-form/" onClick={() => changeMenuItem(null)} >
+                        <Link href="/postformpage" onClick={() => changeMenuItem(null)} >
                             <a className={NB.menuItem} style={{padding: 0, margin: 0}}><img src="/svg/plusB.svg" className={NB.menuItem} alt="add project" /></a>
                         </Link>
                         <Link href="user/[username]" as={`/user/${props.currentUser.username}`} onClick={() => changeMenuItem(null)} >
-                            <a className={NB.menuItem} style={{padding: 0, margin: 0}}><img src={userIcon} className="menu-item" alt="user page" /></a>
+                            <a className={NB.menuItem} style={{padding: 0, margin: 0}}><img src="/svg/userSB.svg" className={NB.menuItem} alt="user page" /></a>
                         </Link>
                         {notifItemButton}
                         {followingItemButton}
-                        <img src={exitIcon} onClick={() => handleLogout()} className={NB.menuItem} alt="log out" />
+                        <img src="/svg/exitB.svg" onClick={() => handleLogout()} className={NB.menuItem} alt="log out" />
                         {moreItemButton}
                     </div>
                 )

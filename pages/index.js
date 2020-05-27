@@ -220,7 +220,7 @@ const PostPage = withRouter((props) => {
                         <h3 className={ppStyle.homeOptionText}>browse all</h3>
                     </a>
                 </Link>
-                <Link href="/postformpage/">
+                <Link href="/postformpage">
                     <a className={`${ppStyle.homeOption} neutralize-link`} style={{backgroundColor: 'rgb(52,166,95)'}}>
                         <img src='/svg/plusW.svg' className={ppStyle.homeOptionIcon} alt="add" />
                         <h3 className={ppStyle.homeOptionText}>add project</h3>
