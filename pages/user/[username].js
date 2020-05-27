@@ -51,11 +51,11 @@ const UserPage = withRouter((props) => {
   const descriptionToShow = () => {
     const amtOfPosts = currentUser.posts.length
     let dFinal = `${currentUser.username} `
-    if (amtOfPosts.length) {
-      if (amtOfPosts === 1) dFinal = `has ${amtOfPosts} awesome project that needs a team.`
-      else dFinal = `has ${amtOfPosts} awesome projects that need teams.`
+    if (amtOfPosts) {
+      if (amtOfPosts === 1) dFinal = dFinal + `has ${amtOfPosts} awesome project that needs a team.`
+      else dFinal = dFinal + `has ${amtOfPosts} awesome projects that need teams.`
     }
-    else dFinal = 'is looking fresh and ready to work on a project!'
+    else dFinal = dFinal + 'is looking fresh and ready to work on a project!'
 
     return dFinal
   }

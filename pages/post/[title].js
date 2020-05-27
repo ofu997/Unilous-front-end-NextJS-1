@@ -228,12 +228,12 @@ const PostPage = withRouter((props) => {
     const descriptionToShow = () => {
         const d = currentPost.description
         const dSentences = d.split('. ')
-        let dFinal = ''
-        for (const sentence of dSentences) {
+        let dFinal = dSentences[0]
+        for (const sentence of dSentences.slice(1,dSentences.length)) {
             if (dFinal.concat(sentence).length < 155) dFinal = [dFinal, sentence].join('. ')
-            else dFinal = dFinal + ' ...'
+            else if (dFinal.slice(-3) !== '...') dFinal = dFinal + ' ...'
         }
-        if (dFinal.length < 50) dFinal = d.slice(0, 155) + ' ...'
+        if (dFinal.length < 50 || dFinal.length >= 160) dFinal = d.slice(0, 155) + ' ...'
 
         return dFinal
     }

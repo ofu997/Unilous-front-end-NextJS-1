@@ -150,7 +150,7 @@ const Results = withRouter((props) => {
                 if (dFinal === start) dFinal = [dFinal, title].join('')
                 else dFinal = [dFinal, title].join(', ')
             }
-            else dFinal = dFinal + ' ...'
+            else if (dFinal.slice(-3) !== '...') dFinal = dFinal + ' ...'
         }
         if (dFinal.length < 50) dFinal = [dFinal, titlesArray[0].slice(0,95) + ' ...'].join('')
 
