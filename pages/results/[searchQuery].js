@@ -12,6 +12,7 @@ import { toggleStretchLayout } from '../../redux/reducers/stretchLayout'
 import { setEventSearch } from '../../redux/reducers/eventSearch'
 import {bindActionCreators} from 'redux'
 import {withRouter} from 'next/router'
+import {apolloClient} from '../../lib/apollo'
 import Layout from '../../components/Layout'
 import Head from 'next/head'
 
@@ -69,9 +70,8 @@ const Results = withRouter((props) => {
     const postsSearched = postChangeConditions(SPQuery.data, props.posts) ?
         SPQuery.data.searchPosts : null
     useEffect(() => {
-        if (postsSearched && !props.posts) {
-            props.addPosts(SPQuery.data.searchPosts)
-            setScrollAtBottom(false)
+        if (props.initialPosts.length && !props.posts) {
+            props.addPosts(props.initialPosts)
         }
         if (postsSearched && props.posts) {
             if (postsSearched.length > 0) {
@@ -82,14 +82,14 @@ const Results = withRouter((props) => {
             }
         }
     }, [SPQuery, props.addPosts, props, postsSearched])
-    if (!props.posts && !SPQuery.data) {
-        return (
-            <div>
-                <div style={{height: '5vh'}}/>
-                <Loading />
-            </div>
-        )
-    }
+    // if (!props.posts) {
+    //     return (
+    //         <div>
+    //             <div style={{height: '5vh'}}/>
+    //             <Loading />
+    //         </div>
+    //     )
+    // }
     const eventQuery = props.eventSearch
     const eventKeys = () => {
         if (eventQuery === 'COVID-19') {
@@ -115,7 +115,7 @@ const Results = withRouter((props) => {
         }
         return false
     }
-    const postsArray = props.posts ? props.posts.filter(p => postToShow(p)) : []
+    const postsArray = props.posts ? props.posts.filter(p => postToShow(p)) : props.initialPosts
     const postsToShow = postsArray ?  postsArray.map(p => <Post stretch={props.stretchLayout} key={`post${p._id}`} post={p} />) : []
     const pallette = palletteGenerator('rgb(40,40,40)').colorPallette
     const layoutBtnClass= props.stretchLayout ? resStyle.layoutButtonGrid : resStyle.layoutButtonStretch
@@ -173,7 +173,6 @@ const Results = withRouter((props) => {
                     <div />
                     <div className={`resultsContent ${layoutClass}`}>
                         {postsToShow}
-                        {/* {props.posts.map(p => <h1>{p.title}</h1>)} */}
                     </div>
                     <div style={{position: 'relative', height: '400px'}}>
                         {showLoading}
@@ -196,6 +195,22 @@ const Results = withRouter((props) => {
 //     mapStateToProps,
 //     { addPosts, toggleStretchLayout, setEventSearch }
 // )(Results)
+
+Results.getInitialProps = async (context) => {
+    const decodedSearch = decodeURIComponent(context.query.searchQuery) === 'all' ? '' : decodeURIComponent(context.query.searchQuery)
+    const postsQuery = await apolloClient.query({
+        query: SEARCH_POSTS,
+        variables: {
+            filterString: decodedSearch,
+            postIds: [],
+            eventQuery: null,
+        }
+    }).catch(err => console.log(err))
+    return {
+        initialPosts: postsQuery.data.searchPosts
+    }
+}
+
 
 const mapStateToProps = (state) => {
 	return {

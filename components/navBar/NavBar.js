@@ -57,7 +57,6 @@ const NavBar = (props) => {
         :
         {display: 'none', backgroundColor: props.alertNotif.color, color: props.alertNotif.textColor}
 
-    console.log(props.noUser)
     if (props.noUser) {
         return (
             <div>

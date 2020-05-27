@@ -13,10 +13,6 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/PostFormPage": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/_app": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
@@ -32,11 +28,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/next/dist/pages/_error": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/postformpage": [
+    "/results/[searchQuery]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
