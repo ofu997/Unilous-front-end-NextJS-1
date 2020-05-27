@@ -57,8 +57,7 @@ const UserPage = withRouter((props) => {
         <title>{`${currentUser.username} | Unilous user`}</title>
         {/* <meta property="og:image" content="https://i.imgur.com/6z9eNzV.png" /> */}
         {/* <meta property="og:title" content={`${currentUser.username} | Unilous user`} key="title" /> */}
-        <meta name="description" content="This user is cool" key="description" />
-        {/* <meta name="description" content={`${currentUser.username} has ${currentUser.posts.length} projects in need of a team team.`} key="description" /> */}
+        <meta name="description" content={`${currentUser.username} has ${currentUser.posts.length} projects in need of a team team.`} key="description" />
         {/* <meta property="og:description" content={`${currentUser.username} has ${currentUser.posts.length} projects in need of a team team.`} key="description" /> */}
       </Head>
       <div className={UP.UPContainer}>

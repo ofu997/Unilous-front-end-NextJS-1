@@ -146,7 +146,7 @@ const Results = withRouter((props) => {
                 {/* <meta property="og:title" content="Browse for projects in Unilous" key="title" />
                 <meta property="og:description" content={`Unilous projects: ${titlesString}.`} key="description" />
                 <meta name="twitter:title" content="Browse for projects in Unilous" key="title"/> */}
-                <meta name="description" content={`Unilous projects: ${titlesString}.`} key="description"/>
+                <meta name="description" content={`Unilous projects: ${titlesString}.`.slice(0,100)} key="description"/>
             </Head>
             <div className="home-wrapper">
                 <div className={resStyle.resultsContainer}>
