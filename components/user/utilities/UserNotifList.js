@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { useQuery } from '@apollo/react-hooks'
-import { LIST_OF_NOTIFICATIONS } from '../../../src/schemas/queries'
-import { setCurrentUserNotifications } from'../../../redux/reducers/currentUser'
-import Notif from './Notif'
-import Loading from '../../Loading'
-import apollo, {apolloClient} from '../../../lib/apollo'
-import {bindActionCreators} from 'redux'
-import UR from '../../../styles/user/user.module.css'
+import { bindActionCreators } from 'redux'
+import { setCurrentUserNotifications } from '../../../redux/reducers/currentUser'
 import UU from '../../../styles/user/userUtilities.module.css'
+import Loading from '../../Loading'
+import Notif from './Notif'
 
 
 
@@ -106,10 +102,10 @@ const UserNotifList = (props) => {
             </div>
         )
     }
-
+    let notifStatus; 
     const statusConditions = (notif) => {
         if (statusFilter === 'all') return true
-        const notifStatus = notif.accepted === null ?
+        notifStatus = notif.accepted === null ?
             'pending' : 
             notif.accepted ?
             notif.post ?
@@ -127,7 +123,7 @@ const UserNotifList = (props) => {
     }
     const showNotifications = props.currentUser.notifications.map(n => {
         if (statusConditions(n) && sentConditions(n)){
-            return <Notif notif={n} key={`UN${n._id}`}/>
+            return <Notif notif={n} key={`UN${n._id}`} notifStatus={notifStatus} />
         }
         return null
     }).reverse()
