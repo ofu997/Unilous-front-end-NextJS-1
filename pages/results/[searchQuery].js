@@ -161,6 +161,7 @@ const Results = withRouter((props) => {
             <Head>
                 <title>Browse for projects in Unilous</title>
                 <meta name="description" content={descriptionToShow()} key="description"/>
+                <meta name="robots" content="noindex" />
             </Head>
             <div className="home-wrapper">
                 <div className={resStyle.resultsContainer}>
