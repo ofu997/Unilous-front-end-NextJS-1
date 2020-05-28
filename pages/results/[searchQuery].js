@@ -171,10 +171,10 @@ const Results = withRouter((props) => {
                         </a>
                     </Link>
                     <div className="navbar-height"/>
-                    <h2 className={resStyle.secondaryTitle}>events</h2>
+                    {/* <h2 className={resStyle.secondaryTitle}>events</h2>
                     <div className={`${resStyle.eventsContainer} ${eventsContainerClass}`}>
                         {eventsHTML}
-                    </div>
+                    </div> */}
                     <div onClick={() => props.toggleStretchLayout(!props.stretchLayout)} className={resStyle.layoutWrapper}>
                         <div className={resStyle.layoutContainer}>
                             <div className={`layoutButton ${layoutBtnClass}`} >
