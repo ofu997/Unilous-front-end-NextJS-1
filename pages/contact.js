@@ -3,10 +3,15 @@ import CT from '../styles/pages/contact.module.css'
 import { connect } from 'react-redux'
 import Layout from '../components/Layout'
 import Contributer from '../components/Contributer'
+import Head from 'next/head'
 
 const Contact = () => {
     return (
         <Layout>
+            <Head>
+                <title>Contact | Unilous</title>
+                <meta name="description" content="Contact the Unilous team" key="description"/>
+            </Head>
             <div className="navbar-height" />
             <div className={CT.contactsContainer}>
                 <Contributer 
