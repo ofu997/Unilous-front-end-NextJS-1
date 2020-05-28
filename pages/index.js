@@ -202,8 +202,8 @@ const PostPage = withRouter((props) => {
     const pallette = palletteGenerator(currentPost.color).colorPallette
 
     const teamHTML = currentPost.team ? currentPost.team.map(un =>
-        <Link href="/user/username" as={`/user/${un}`} className={`${ppStyle.PPCUserContainer} neutralize-link`} key={`PT${un}`}>
-            <a>
+        <Link href="/user/username" as={`/user/${un}`} key={`PT${un}`}>
+            <a className={`${ppStyle.PPCUserContainer} neutralize-link`}>
                 <img className={ppStyle.PPCUserIcon} src='/svg/userB.svg' alt="user" />
                 <p className="NM">{un}</p>
             </a>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { MAKE_NOTIFICATION } from '../../src/schemas/mutations'
-import { FIND_USER, ALL_USERS, FIND_POST } from '../../src/schemas/queries'
+import { FIND_USER, ALL_USERS, LIST_OF_POSTS } from '../../src/schemas/queries'
 import { setAlert, resetAlert } from '../../redux/reducers/alertNotif'
 import UP from '../../styles/pages/userPage.module.css';
 import PostSmallList from '../../components/post/PostSmallList'
@@ -76,7 +76,7 @@ const UserPage = withRouter((props) => {
           <ReferenceLink rl={currentUser.referenceLink} />
           <h2 className={UP.UPTitle}>posts</h2>
           <div className={UP.UPPostsContainer}>
-            <PostSmallList posts={currentUser.posts} />
+            <PostSmallList posts={props.userPosts} />
           </div>
         </div>
         { props.currentUser !== currentUser.username &&
@@ -113,9 +113,16 @@ export async function getStaticProps({params}) {
     query: FIND_USER,
     variables: {username: params.username}
   }).catch(err => console.log(err))
+  
+  const userPostsQuery = await apolloClient.query({
+      query: LIST_OF_POSTS,
+      variables: {id_list: userQuery.data.findUser.posts.map(p => p._id)}
+  }).catch(err => console.log(err))
+
   return {
     props: {
-      user: userQuery.data.findUser
+      user: userQuery.data.findUser,
+      userPosts: userPostsQuery.data.getListOfPosts
     }
   }
 }
