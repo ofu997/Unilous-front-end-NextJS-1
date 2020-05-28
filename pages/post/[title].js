@@ -202,40 +202,14 @@ const PostPage = withRouter((props) => {
     const pallette = palletteGenerator(currentPost.color).colorPallette
 
     const teamHTML = currentPost.team ? currentPost.team.map(un =>
-        <Link href="/user/username" as={`/user/${un}`} className={`${ppStyle.PPCUserContainer} neutralize-link`} key={`PT${un}`}>
-            <a>
+        <Link href="/user/username" as={`/user/${un}`} key={`PT${un}`}>
+            <a className={`${ppStyle.PPCUserContainer} neutralize-link`}>
                 <img className={ppStyle.PPCUserIcon} src='/svg/userB.svg' alt="user" />
                 <p className="NM">{un}</p>
             </a>
         </Link>
         
     ): null
-
-    const HomeContent = () => {
-        if (props.home) {
-            return (
-                <div className={ppStyle.homeOptions}>
-                    <Link href="/results/" className={`${ppStyle.homeOption} neutralize-link`} style={{backgroundColor: '#282828'}}>
-                        <a>
-                            <img src='/svg/searchWW.svg' className={ppStyle.homeOptionIcon} alt="search" />
-                            <h3 className={ppStyle.homeOptionText}>browse all</h3>
-                        </a>
-                    </Link>
-                    <Link href="/postformpage/" className={`${ppStyle.homeOption} neutralize-link`} style={{backgroundColor: 'rgb(52,166,95)'}}>
-                        <img src='/svg/plusW.svg' className={ppStyle.homeOptionIcon} alt="add" />
-                        <h3 className={ppStyle.homeOptionText}>add project</h3>
-                    </Link>
-                    <a href="https://discord.gg/v7vFc9U" className={`${ppStyle.homeOption} ${ppStyle.homeOptionHighlight} neutralize-link`} style={{backgroundColor: '#7289DA'}}>
-                        <img src='/svg/websites/discord.svg' className={ppStyle.homeOptionIcon} alt="Discord" />
-                        <h3 className={ppStyle.homeOptionText}>community discord</h3>
-                    </a>
-                </div>
-            )
-        }
-        else {
-            return null
-        }
-    }
 
     const ModifiedDescription = () => {
         const spacedDis = currentPost.description.split(' ')
@@ -251,20 +225,29 @@ const PostPage = withRouter((props) => {
         return <p className={ppStyle.PPCDescription} dangerouslySetInnerHTML={{__html: finalDis}} />
     }
     const headImage = currentPost.imageLinks.length ? currentPost.imageLinks[0] : 'https://i.imgur.com/6z9eNzV.png'
+    const descriptionToShow = () => {
+        const d = currentPost.description
+        const dSentences = d.split('. ')
+        let dFinal = dSentences[0]
+        for (const sentence of dSentences.slice(1,dSentences.length)) {
+            if (dFinal.concat(sentence).length < 155) dFinal = [dFinal, sentence].join('. ')
+            else if (dFinal.slice(-3) !== '...') dFinal = dFinal + ' ...'
+        }
+        if (dFinal.length < 50 || dFinal.length >= 160) dFinal = d.slice(0, 155) + ' ...'
+
+        return dFinal
+    }
+    
     return (
         <Layout>
             <Head>
                 <title>{currentPost.title} | Unilous</title>
                 <meta property="og:image" content={headImage} key="title" />
-                <meta property="og:title" content={`${currentPost.title} | Unilous`} key="title" />
-                <meta property="og:description" content={`${currentPost.description}`} key="description"/>
-                <meta name="twitter:title" content={`${currentPost.title} | Unilous`} key="title"/>
-                <meta name="description" content={`${currentPost.description}`} key="description"/>
+                <meta name="description" content={descriptionToShow()} key="description"/>
             </Head>
             <div className="navbar-height" />
             <div className={ppStyle.postPageContainer}>
                 <div className={ppStyle.PPContent}>
-                    <HomeContent />
                     <h2 className={ppStyle.PPCTitle}>{currentPost.title}</h2>
                     <div className={ppStyle.PPCSubHeader}>
                         <Link href="/user/[username]" as={`/user/${encodeURIComponent(currentPost.user.username)}`}>

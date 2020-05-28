@@ -202,8 +202,8 @@ const PostPage = withRouter((props) => {
     const pallette = palletteGenerator(currentPost.color).colorPallette
 
     const teamHTML = currentPost.team ? currentPost.team.map(un =>
-        <Link href="/user/username" as={`/user/${un}`} className={`${ppStyle.PPCUserContainer} neutralize-link`} key={`PT${un}`}>
-            <a>
+        <Link href="/user/username" as={`/user/${un}`} key={`PT${un}`}>
+            <a className={`${ppStyle.PPCUserContainer} neutralize-link`}>
                 <img className={ppStyle.PPCUserIcon} src='/svg/userB.svg' alt="user" />
                 <p className="NM">{un}</p>
             </a>
@@ -214,13 +214,13 @@ const PostPage = withRouter((props) => {
     const HomeContent = () => {
         return (
             <div className={ppStyle.homeOptions}>
-                <Link href="/results/all">
+                <Link href="/results/[searchQuery]" as="/results/all">
                     <a className={`${ppStyle.homeOption} neutralize-link`} style={{backgroundColor: '#282828'}}>
                         <img src='/svg/searchWW.svg' className={ppStyle.homeOptionIcon} alt="search" />
                         <h3 className={ppStyle.homeOptionText}>browse all</h3>
                     </a>
                 </Link>
-                <Link href="/postformpage/">
+                <Link href="/postformpage">
                     <a className={`${ppStyle.homeOption} neutralize-link`} style={{backgroundColor: 'rgb(52,166,95)'}}>
                         <img src='/svg/plusW.svg' className={ppStyle.homeOptionIcon} alt="add" />
                         <h3 className={ppStyle.homeOptionText}>add project</h3>
@@ -272,10 +272,9 @@ const PostPage = withRouter((props) => {
         <Layout>
             <Head>
                 <title>Unilous</title>
-                <meta property="og:title" content="Unilous" key="title" />
-                <meta property="og:description" content="Share a project, build a team, make it awesome!" key="description" />
-                <meta name="twitter:title" content="Unilous" key="title"/>
-                <meta name="description" content="Share a project, build a team, make it awesome!" key="description"/>
+                <meta property="og:image" content="https://i.imgur.com/d6bsnRx.png" key="title" />
+                <meta name="description" content="Looking to join or make a team, Unilous will help you make it happen! Join our skilled community of people looking to make something great." key="description"/>
+                <meta name="google-site-verification" content="-ccdPuW0WxjjhXsjDgnfbYeolghrlU6r3MLjOdWKpCw" />
             </Head>
             <div className="navbar-height" />
             <div className={ppStyle.postPageContainer}>

@@ -99,7 +99,7 @@ const Logged = (props) => {
 
     const showInBanner = showUtilities ?
         <React.Fragment>
-            <Link href="/postformpage/" >
+            <Link href="/postformpage" >
                 <a className={`${UR.UUAddPost} ${UR.userUtilityOption} neutralize-link`} style={{gridColumn: '1/3'}}>
                     <img src="/svg/plusB.svg" className={UR.UUAPIcon} alt="add post"/>
                     <h4 className={UR.UUAPText}>add post</h4>

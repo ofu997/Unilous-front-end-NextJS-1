@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useQuery, useMutation } from '@apollo/react-hooks'
 import { MAKE_NOTIFICATION } from '../../src/schemas/mutations'
-import { FIND_USER, ALL_USERS, FIND_POST } from '../../src/schemas/queries'
+import { FIND_USER, ALL_USERS, LIST_OF_POSTS } from '../../src/schemas/queries'
 import { setAlert, resetAlert } from '../../redux/reducers/alertNotif'
 import UP from '../../styles/pages/userPage.module.css';
 import PostSmallList from '../../components/post/PostSmallList'
@@ -47,18 +47,23 @@ const UserPage = withRouter((props) => {
     }
   }
   const pallette = palletteGenerator("rgb(40,40,40)").colorPallette
-  // console.log('props.currentUser', props.currentUser); 
-  // console.log(typeof props.currentUser)
-  // console.log('props.currentUser.username: ' + props.currentUser.username)
-  // console.log('page username: ' + currentUser.username)
+  
+  const descriptionToShow = () => {
+    const amtOfPosts = currentUser.posts.length
+    let dFinal = `${currentUser.username} `
+    if (amtOfPosts) {
+      if (amtOfPosts === 1) dFinal = dFinal + `has ${amtOfPosts} awesome project that needs a team.`
+      else dFinal = dFinal + `has ${amtOfPosts} awesome projects that need teams.`
+    }
+    else dFinal = dFinal + 'is looking fresh and ready to work on a project!'
+
+    return dFinal
+  }
   return (
     <Layout>
       <Head>
         <title>{`${currentUser.username} | Unilous user`}</title>
-        <meta property="og:image" content="https://i.imgur.com/6z9eNzV.png" />
-        <meta property="og:title" content={`${currentUser.username} | Unilous user`} key="title" />
-        <meta name="description" content={`${currentUser.username} has ${currentUser.posts.length} projects in need of a team team.`} key="description" />
-        <meta property="og:description" content={`${currentUser.username} has ${currentUser.posts.length} projects in need of a team team.`} key="description" />
+        <meta name="description" content={descriptionToShow()} key="description" />
       </Head>
       <div className={UP.UPContainer}>
         <div className="navbar-height" style={{gridColumn: '1/3'}} />
@@ -71,7 +76,7 @@ const UserPage = withRouter((props) => {
           <ReferenceLink rl={currentUser.referenceLink} />
           <h2 className={UP.UPTitle}>posts</h2>
           <div className={UP.UPPostsContainer}>
-            <PostSmallList posts={currentUser.posts} />
+            <PostSmallList posts={props.userPosts} />
           </div>
         </div>
         { props.currentUser !== currentUser.username &&
@@ -108,9 +113,16 @@ export async function getStaticProps({params}) {
     query: FIND_USER,
     variables: {username: params.username}
   }).catch(err => console.log(err))
+  
+  const userPostsQuery = await apolloClient.query({
+      query: LIST_OF_POSTS,
+      variables: {id_list: userQuery.data.findUser.posts.map(p => p._id)}
+  }).catch(err => console.log(err))
+
   return {
     props: {
-      user: userQuery.data.findUser
+      user: userQuery.data.findUser,
+      userPosts: userPostsQuery.data.getListOfPosts
     }
   }
 }

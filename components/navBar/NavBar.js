@@ -28,7 +28,7 @@ const NavBar = (props) => {
         else setMenuItemShown(item)
     }
 
-    const linkToPush = `/results/${encodeURIComponent(props.query)}`
+    const linkToPush = props.query ? `/results/${encodeURIComponent(props.query)}` : '/results/all'
     
     const enterQuery = () => {
         Router.push(linkToPush)
@@ -57,7 +57,6 @@ const NavBar = (props) => {
         :
         {display: 'none', backgroundColor: props.alertNotif.color, color: props.alertNotif.textColor}
 
-    console.log(props.noUser)
     if (props.noUser) {
         return (
             <div>
@@ -69,7 +68,7 @@ const NavBar = (props) => {
                             </a>
                         </Link>
                         <div className={NB.searchBar}>
-                            <Link href={linkToPush}  onClick={() => enterQuery()}>
+                            <Link href='/results/[searchQuery]' as={linkToPush}  onClick={() => enterQuery()}>
                                 <a className={`neutralize-link ${NB.enterSearch} ${NB.searchHover}`}><img src="/svg/searchW.svg" className={NB.searchIcon} alt="search" /></a>
                             </Link>
                             <div className={NB.searchHr} style={{backgroundColor: 'white'}} />
@@ -140,15 +139,15 @@ const NavBar = (props) => {
     
                 return (
                     <div className={NB.navBarSubContainerM} style={menuStyle}>
-                        <Link href="/post-form/" onClick={() => changeMenuItem(null)} >
+                        <Link href="/postformpage" onClick={() => changeMenuItem(null)} >
                             <a className={NB.menuItem} style={{padding: 0, margin: 0}}><img src="/svg/plusB.svg" className={NB.menuItem} alt="add project" /></a>
                         </Link>
                         <Link href="user/[username]" as={`/user/${props.currentUser.username}`} onClick={() => changeMenuItem(null)} >
-                            <a className={NB.menuItem} style={{padding: 0, margin: 0}}><img src={userIcon} className="menu-item" alt="user page" /></a>
+                            <a className={NB.menuItem} style={{padding: 0, margin: 0}}><img src="/svg/userSB.svg" className={NB.menuItem} alt="user page" /></a>
                         </Link>
                         {notifItemButton}
                         {followingItemButton}
-                        <img src={exitIcon} onClick={() => handleLogout()} className={NB.menuItem} alt="log out" />
+                        <img src="/svg/exitB.svg" onClick={() => handleLogout()} className={NB.menuItem} alt="log out" />
                         {moreItemButton}
                     </div>
                 )
@@ -226,7 +225,7 @@ const NavBar = (props) => {
                         </a>
                     </Link>
                     <div className={NB.searchBar}>
-                        <Link href={linkToPush}  onClick={() => enterQuery()}>
+                        <Link href='/results/[searchQuery]' as={linkToPush}  onClick={() => enterQuery()}>
                             <a className={`neutralize-link ${NB.enterSearch} ${NB.searchHover}`}><img src="/svg/searchW.svg" className={NB.searchIcon} alt="search" /></a>
                         </Link>
                         <div className={NB.searchHr} style={{backgroundColor: 'white'}} />
@@ -263,7 +262,7 @@ const NavBar = (props) => {
                 </div>
                 <div className={NB.navBarSubContainer} style={showWhenSB}>
                     <div className={NB.searchBar}>
-                        <Link href={linkToPush}  onClick={() => enterQuery()}>
+                        <Link href='/results/[searchQuery]' as={linkToPush}  onClick={() => enterQuery()}>
                             <a className={`neutralize-link ${NB.enterSearch} ${NB.searchHover}`}>
                                 <img src="/svg/searchW.svg" className={NB.searchIcon} alt="search" />
                             </a>
