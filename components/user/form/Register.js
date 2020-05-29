@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { useMutation } from '@apollo/react-hooks'
-import { CREATE_USER } from '../../../src/schemas/mutations'
+import { CREATE_USER, LOGIN } from '../../../src/schemas/mutations'
 import InputHeader from '../../text-field/InputHeader'
 import { useField, triggerAlert } from '../../../src/functions/functions'
 import { setAlert, resetAlert } from '../../../redux/reducers/alertNotif'
+import { setToken } from '../../../redux/reducers/token'
 import UR from '../../../styles/user/user.module.css'
 
 const Register = (props) => {
@@ -23,8 +24,10 @@ const Register = (props) => {
         if (cleanedMessage.includes('email')) cleanedMessage = `email$: ${email.fields.value} is already being used`
         triggerAlert('warning', cleanedMessage, props.setAlert, props.resetAlert)
     }
+    const onLoginError = (e) => console.log(e)
 
     const [registerMutation] = useMutation(CREATE_USER, { onError })
+    const [loginMutation] = useMutation(LOGIN, {onError: onLoginError})
     
     const handleSumbit = async (e) => {
         e.preventDefault()
@@ -48,13 +51,22 @@ const Register = (props) => {
             if (props.changeMenuItem) {
                 props.changeMenuItem(null)
             }
+            const loginResult = await loginMutation({
+                variables: {
+                    username: username.fields.value,
+                    password: password.fields.value
+                }
+            })
+            const token = loginResult.data.login.value
+            localStorage.setItem('token', token)
+            localStorage.setItem('username', username.fields.value)
+            props.setToken(token)
             username.reset()
             password.reset()
             rePassword.reset()
             email.reset()
             referenceLink.reset()
-            triggerAlert('success', 'registered$: account successfully created', props.setAlert, props.resetAlert)
-            console.log('registered')
+            triggerAlert('success', 'registered$: account successfully created. signing you in now.', props.setAlert, props.resetAlert)
         }
     }
 
@@ -98,5 +110,5 @@ const Register = (props) => {
 //}
 export default connect(
     null,
-    { setAlert, resetAlert }
+    { setAlert, resetAlert, setToken }
 )(Register)

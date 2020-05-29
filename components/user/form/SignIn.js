@@ -34,12 +34,11 @@ const SignIn = (props) => {
                 props.changeMenuItem(null)
             }
             const token = result.data.login.value
-            username.reset()
-            password.reset()
             localStorage.setItem('token', token)
             localStorage.setItem('username', username.fields.value)
+            username.reset()
+            password.reset()
             props.setToken(token)
-            window.location.reload()
         }
     }
 

@@ -28,7 +28,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/results/[searchQuery]": [
+    "/post/[title]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
