@@ -1,4 +1,7 @@
 Do next (now)
+    refine searchPosts query in the back-end
+    figure out to to pregressively load results the right way
+
     eliminate load from user projects
 
     make sure posts are loaded before

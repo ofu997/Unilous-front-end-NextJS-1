@@ -150,6 +150,14 @@ export const ALL_USERS = gql`
   }
 `
 
+export const SOME_USERS = gql`
+  query someUsers($skip: Int!, $first: Int!){
+    someUsers(skip: $skip, first: $first){
+      username
+    }
+  }
+`
+
 export const ALL_POSTS = gql`
   query{
     allPosts{

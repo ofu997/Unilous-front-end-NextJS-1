@@ -17,31 +17,37 @@ import Layout from '../../components/Layout'
 import Head from 'next/head'
 
 const Results = withRouter((props) => {
-    const currentIds = props.posts ? props.posts.map(p => p._id) : []
     const [scrollAtBottom, setScrollAtBottom] = useState(false)
+    const [moreResults, setMoreResults] = useState(true)
     const decodedSearch = decodeURIComponent(props.router.query.searchQuery) === 'all' ? '' : decodeURIComponent(props.router.query.searchQuery)
+    const onError = (e) => console.log(e)
     const SPQuery = useQuery(SEARCH_POSTS, {
         variables: {
             filterString: decodedSearch,
-            postIds: currentIds,
+            postIds: [],
             eventQuery: props.eventSearch,
-        }
+        },
+        onError
     })
-    const moreResults = () => {
-        if (SPQuery.data && SPQuery.data.searchPosts === null) {
-            return false
-        }
-        return true
+
+    const loadMorePosts = (data, fetchMore) => {
+        return fetchMore({
+            variables: {postIds: data.searchPosts.map(p => p._id)},
+            updateQuery: (previousResult, {fetchMoreResult}) => {
+                if (!fetchMoreResult || !fetchMoreResult.searchPosts) {
+                    setMoreResults(false)
+                    return previousResult
+                }
+                return Object.assign({}, previousResult, {
+                    searchPosts: [...previousResult.searchPosts, ...fetchMoreResult.searchPosts]
+                })
+            }
+        })
     }
     if (typeof window !== 'undefined') {
-        if ((window.innerHeight + window.scrollY) > (document.body.offsetHeight - 100) && !scrollAtBottom) {
-            setScrollAtBottom(true)
-        }
-        if ((window.innerHeight + window.scrollY) <= (document.body.offsetHeight - 100) && scrollAtBottom) {
-            setScrollAtBottom(false)
-        }
         const triggerWhenScroll = () => {
-            if ((window.innerHeight + window.scrollY) > (document.body.offsetHeight - 100) && !scrollAtBottom) {
+            if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100) && !scrollAtBottom) {
+                loadMorePosts(SPQuery.data, SPQuery.fetchMore)
                 setScrollAtBottom(true)
             }
             if ((window.innerHeight + window.scrollY) <= (document.body.offsetHeight - 100) && scrollAtBottom) {
@@ -51,45 +57,6 @@ const Results = withRouter((props) => {
         window.addEventListener('scroll', triggerWhenScroll, false)
     }
 
-    const postChangeConditions = (query, reducer) => {
-        if (!scrollAtBottom) return false
-        if (!query) return false
-        if (!query.searchPosts) return false
-        if (!reducer) {
-            return true
-        }
-        const queryTitles = query.searchPosts.map(i => i.title)
-        const reducerTitles = reducer.map(i => i.title)
-        for (const title of queryTitles) {
-            if (!reducerTitles.includes(title)) {
-                return true
-            }
-        }
-        return false
-    }
-    const postsSearched = postChangeConditions(SPQuery.data, props.posts) ?
-        SPQuery.data.searchPosts : null
-    useEffect(() => {
-        if (!props.posts) {
-            props.addPosts(props.initialPosts)
-        }
-        if (postsSearched && props.posts) {
-            if (postsSearched.length > 0) {
-                if (!props.posts.map(p => p._id).includes(postsSearched[0]._id)){
-                    props.addPosts(SPQuery.data.searchPosts)
-                    setScrollAtBottom(false)
-                }
-            }
-        }
-    }, [SPQuery, props.addPosts, props, postsSearched])
-    // if (!props.posts) {
-    //     return (
-    //         <div>
-    //             <div style={{height: '5vh'}}/>
-    //             <Loading />
-    //         </div>
-    //     )
-    // }
     const eventQuery = props.eventSearch
     const eventKeys = () => {
         if (eventQuery === 'COVID-19') {
@@ -115,7 +82,7 @@ const Results = withRouter((props) => {
         }
         return false
     }
-    const postsArray = props.posts ? props.posts.filter(p => postToShow(p)) : props.initialPosts
+    const postsArray = SPQuery.data ? SPQuery.data.searchPosts.map(p => p) : props.initialPosts
     const postsToShow = postsArray ?  postsArray.map(p => <Post stretch={props.stretchLayout} key={`post${p._id}`} post={p} />) : []
     const pallette = palletteGenerator('rgb(40,40,40)').colorPallette
     const layoutBtnClass= props.stretchLayout ? resStyle.layoutButtonGrid : resStyle.layoutButtonStretch
@@ -137,7 +104,7 @@ const Results = withRouter((props) => {
         </div>
     )
     const eventsContainerClass = props.eventSearch ? resStyle.ECActive : null
-    const showLoading = moreResults() ? <Loading /> : <h3 style={{opacity: '0.8'}}>no more posts</h3>
+    const showLoading = moreResults ? <Loading /> : <h3 style={{opacity: '0.8'}}>no more posts</h3>
     const titlesString = postsArray ? postsArray.map(p => p.title).join(', ') : []
 
     const descriptionToShow = () => {
@@ -161,7 +128,6 @@ const Results = withRouter((props) => {
             <Head>
                 <title>Browse for projects in Unilous</title>
                 <meta name="description" content={descriptionToShow()} key="description"/>
-                <meta name="robots" content="noindex" />
             </Head>
             <div className="home-wrapper">
                 <div className={resStyle.resultsContainer}>
