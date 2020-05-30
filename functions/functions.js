@@ -15,10 +15,7 @@ export const triggerAlert = (type, message, setAlert, resetAlert) => {
 }
 
 export const websiteStats = (url) => {
-    if (url.split('/').length < 3) {
-        return {icon: '/svg/websites/input.svg', color: '#484848',title: 'unknown url'}
-    }
-    const start = url.split('/')[2]
+    const start = url.split('/')[2] ? url.split('/')[2] : ''
     if (start.includes('unilous')) {
         return {icon: '/svg/logo/logoW.svg', color: '#282828', title: 'Unilous'}
     }
@@ -26,7 +23,7 @@ export const websiteStats = (url) => {
         return {icon: '/svg/websites/discord.svg', color: '#7289DA', title: 'Discord'}
     }
     if (start.includes('trello')) {
-        return {icon: '/svg/website/trello.svg', color: '#0079BF', title: 'Trello'}
+        return {icon: '/svg/websites/trello.svg', color: '#0079BF', title: 'Trello'}
     }
     if (start.includes('whatsapp')) {
         return {icon: '/svg/websites/whatsapp.svg', color: '#25D366', title: 'WhatsApp'}
@@ -49,7 +46,7 @@ export const websiteStats = (url) => {
     if (start.includes('github')) {
         return {icon: '/svg/websites/gitHub.svg', color: '#333', title: 'GitHub'}
     }
-    return {icon: 'svg/websites/internet.svg', color: '#282828',title: 'unknown url'}
+    return {icon: '/svg/websites/internet.svg', color: '#484848',title: 'unknown url'}
 }
 
 export const useField = (type) => {
