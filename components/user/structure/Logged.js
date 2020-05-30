@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useQuery } from '@apollo/react-hooks'
-import { FIND_USER } from '../../../src/schemas/queries'
+import { FIND_USER } from '../../../schemas/queries'
 import { setCurrentUser } from '../../../redux/reducers/currentUser'
 import { clearToken } from '../../../redux/reducers/token'
 import UserNotifList from '../utilities/UserNotifList'

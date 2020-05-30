@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useQuery } from '@apollo/react-hooks'
-import { LIST_OF_NOTIFICATIONS } from '../../../src/schemas/queries'
+import { LIST_OF_NOTIFICATIONS } from '../../../schemas/queries'
 import { setCurrentUserNotifications } from'../../../redux/reducers/currentUser'
 import Notif from './Notif'
 import Loading from '../../Loading'

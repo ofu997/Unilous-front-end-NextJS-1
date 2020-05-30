@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { useMutation } from '@apollo/react-hooks'
-import { CREATE_USER, LOGIN } from '../../../src/schemas/mutations'
+import { CREATE_USER, LOGIN } from '../../../schemas/mutations'
 import InputHeader from '../../text-field/InputHeader'
 import { useField, triggerAlert } from '../../../src/functions/functions'
 import { setAlert, resetAlert } from '../../../redux/reducers/alertNotif'

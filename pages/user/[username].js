@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useQuery, useMutation } from '@apollo/react-hooks'
-import { MAKE_NOTIFICATION } from '../../src/schemas/mutations'
-import { FIND_USER, ALL_USERS, LIST_OF_POSTS } from '../../src/schemas/queries'
+import { MAKE_NOTIFICATION } from '../../schemas/mutations'
+import { FIND_USER, ALL_USERS, LIST_OF_POSTS } from '../../schemas/queries'
 import { setAlert, resetAlert } from '../../redux/reducers/alertNotif'
 import UP from '../../styles/pages/userPage.module.css';
 import PostSmallList from '../../components/post/PostSmallList'

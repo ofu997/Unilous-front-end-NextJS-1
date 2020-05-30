@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { useMutation } from '@apollo/react-hooks'
-import { CREATE_POST } from '../src/schemas/mutations'
+import { CREATE_POST } from '../schemas/mutations'
 import { useField, triggerAlert, palletteGenerator, websiteStats } from '../src/functions/functions'
 import PFP from '../styles/pages/postForm.module.css'
 import { withRouter } from 'react-router-dom'

@@ -20,15 +20,11 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/contact": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/post/[title]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/results/[searchQuery]": [
+    "/user/[username]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

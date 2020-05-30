@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { useQuery } from '@apollo/react-hooks'
 import NavBar from './navBar/NavBar'
-import { FIND_USER, PENDING_NOTIFS, LIST_OF_NOTIFICATIONS } from '../src/schemas/queries'
+import { FIND_USER, PENDING_NOTIFS, LIST_OF_NOTIFICATIONS } from '../schemas/queries'
 import {bindActionCreators} from 'redux'
 import Head from 'next/head'
 
