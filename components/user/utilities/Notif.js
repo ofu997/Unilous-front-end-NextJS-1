@@ -6,7 +6,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { ACCEPT_NOTIFICATION, DECLINE_NOTIFICATION, ANSWER_QUESTION } from '../../../schemas/mutations'
 import { setCurrentUserNotifications } from '../../../redux/reducers/currentUser'
 import { setAlert, resetAlert } from '../../../redux/reducers/alertNotif'
-import { useField, websiteStats, triggerAlert } from '../../../src/functions/functions'
+import { useField, websiteStats, triggerAlert } from '../../../functions/functions'
 
 const Notif = (props) => {
     const handleError = (e) => {

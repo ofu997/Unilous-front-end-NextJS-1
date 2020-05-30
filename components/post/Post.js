@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { SAVE_POST } from '../../schemas/mutations'
 import { setCurrentUserSP } from '../../redux/reducers/currentUser'
 import PS from '../../styles/post.module.css'
-import { palletteGenerator, triggerAlert } from '../../src/functions/functions'
+import { palletteGenerator, triggerAlert } from '../../functions/functions'
 import { setAlert, resetAlert } from '../../redux/reducers/alertNotif'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 

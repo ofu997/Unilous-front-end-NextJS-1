@@ -5,7 +5,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { REMOVE_SAVED_POST } from '../../schemas/mutations'
 import { setCurrentUserPosts, setCurrentUserSP } from '../../redux/reducers/currentUser'
 import { setAlert, resetAlert } from '../../redux/reducers/alertNotif'
-import { triggerAlert, palletteGenerator } from '../../src/functions/functions'
+import { triggerAlert, palletteGenerator } from '../../functions/functions'
 import PT from '../../styles/post.module.css'
 
 const PostSmall = (props) => {
