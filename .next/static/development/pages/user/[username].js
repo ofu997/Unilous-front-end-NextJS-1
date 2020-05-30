@@ -2095,7 +2095,7 @@ eval("var api = __webpack_require__(/*! ../../node_modules/next/node_modules/sty
 
 /***/ }),
 
-/***/ 4:
+/***/ 2:
 /*!********************************************************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fuser%2F%5Busername%5D&absolutePagePath=C%3A%5CCode%5CProjects%5CprojectU%5Cprojectu%5Cpages%5Cuser%5C%5Busername%5D.js&hotRouterUpdates=false ***!
   \********************************************************************************************************************************************************************************************/
@@ -2118,4 +2118,4 @@ eval("module.exports = dll_c2e10d183b950a67d9e7;//# sourceURL=[module]\n//# sour
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js"]]]);
+},[[2,"static/runtime/webpack.js"]]]);

@@ -47,7 +47,9 @@ const Results = withRouter((props) => {
     if (typeof window !== 'undefined') {
         const triggerWhenScroll = () => {
             if ((window.innerHeight + window.scrollY) >= (document.body.offsetHeight - 100) && !scrollAtBottom) {
-                loadMorePosts(SPQuery.data, SPQuery.fetchMore)
+                try {
+                    loadMorePosts(SPQuery.data, SPQuery.fetchMore)
+                } catch (e) {}
                 setScrollAtBottom(true)
             }
             if ((window.innerHeight + window.scrollY) <= (document.body.offsetHeight - 100) && scrollAtBottom) {
