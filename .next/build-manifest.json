@@ -28,11 +28,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/results/[searchQuery]": [
+    "/postformpage": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/user/[username]": [
+    "/results/[searchQuery]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

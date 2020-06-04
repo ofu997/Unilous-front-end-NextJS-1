@@ -135,7 +135,9 @@ const UserNotifList = (props) => {
         <div className="userUtil-notif">
             <Filter />
             <div style={{height: '10px'}} />
+            <div style={{display: 'grid', rowGap: '10px', width: '95%', margin: 'auto', marginTop: '10px'}}>
             {showNotifications}
+            </div>
             <div style={{height: '10px'}} />
         </div>
     )

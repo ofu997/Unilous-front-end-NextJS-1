@@ -73,7 +73,8 @@ const Register = (props) => {
     const bgStyle = props.noBG ? {backgroundColor: '#282828'} : null
 
     return (
-        <div className={UR.userFormContainer} style={bgStyle}>
+        <div className={UR.userFormContainer}>
+            <h2>register</h2>
             <form className={UR.userForm} onSubmit={(e) => handleSumbit(e)}>
                 <InputHeader inputFor="SI-username" info={false} title="username" color="dark" />
                 <input className={UR.UFInput} {...username.fields} id="SI-username" />

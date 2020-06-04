@@ -1,0 +1,39 @@
+.container {
+    width: 50%;
+    margin-left: 10%;
+    /* background-color: #282828; */
+}
+.lgPara {
+    font-size: 20px;
+}
+.button {
+    border-radius: 3px;
+    border: 2px solid;
+    width: 100%;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 20px;
+}
+.btnDark {
+    background-color: #282828;
+    color: white;
+    border-color: #282828;
+}
+.btnLight {
+    background-color: white;
+    color: #282828;
+    border-color: white;
+}
+.btnLD {
+    background-color: #282828;
+    color: white;
+    border-color: white;
+}
+.linkDark {
+    color: #282828;
+    font-weight: bold;
+}
+.linkLight {
+    color: white;
+    font-weight: bold;
+}

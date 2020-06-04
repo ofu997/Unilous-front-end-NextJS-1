@@ -349,6 +349,7 @@ PostPage.getInitialProps = async () => {
         query: FIND_POST,
         variables: {title: 'Unilous'} 
     }).catch(err => console.log(err))
+    // console.log(postQuery)
     return {
         post: postQuery.data.findPost,
     }

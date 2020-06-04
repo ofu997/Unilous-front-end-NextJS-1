@@ -1,4 +1,11 @@
 Do next (now)
+    add functionality to NewNavBar
+    add mobile version to NewNavBar
+
+    figure out why the Signed items stack vertically
+
+    added home page js and css
+
     refine searchPosts query in the back-end
     figure out to to pregressively load results the right way
 
@@ -194,7 +201,8 @@ Errors & Warnings
             the reason is because to reload the currentSlice when the broweser back arrow is hit the NavBar is not changed only the Slice therefore the Slice changes the currentSlice with again reloads the NavBar
     MongoNetworkError: failed to connect to server [cluster0-shard-00-00-dlwek.mongodb.net:27017] on first connect [MongoNetworkError: connection 5 to cluster0-shard-00-00-dlwek.mongodb.net:27017 closed]
         to remove this error make sure the ip addresses whitelist are configured correctly on the database service
-
+    Button CSS screwed up
+        button can only contain one element inside it
 Future notes
     before you lose your mind (if you can afford it) start from 0
     reduce to smaller components untill it works as intended

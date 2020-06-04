@@ -296,9 +296,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-clearToken
-resetAlert
-
 export default connect(
     mapStateToProps,
     mapDispatchToProps

@@ -1,0 +1,259 @@
+import React, {useState, useEffect} from 'react'
+import { connect } from 'react-redux'
+import NB from '../../styles/newNavBar.module.css'
+import {useField} from '../../functions/functions'
+import Link from 'next/link'
+import NotSigned from './signed/NotSigned'
+import Signed from './signed/Signed'
+import {bindActionCreators} from 'redux'
+import SignIn from '../user/form/SignIn'
+import Register from '../user/form/Register'
+import {clearToken} from '../../redux/reducers/token'
+import UserNotifList from '../user/utilities/UserNotifList'
+import { FIND_USER } from '../../schemas/queries'
+import { useQuery } from '@apollo/react-hooks'
+
+const NavBar = (props) => {
+    if (props.noUser) {
+        return (
+            <div>
+                <div className="HWM">
+                    <div className={NB.container}>
+                        <Link href="/">
+                            <a className={`${NB.brandContainer} neutralize-link`}>
+                                <img src="/svg/logo/logoW.svg" className={NB.icon} />
+                                <h2 className={NB.name}>Unilous</h2>
+                            </a>
+                        </Link>
+                    </div>
+                </div>
+                <div className="SWM">
+                    <div className={NB.containerM}>
+                        <div className={NB.navIcon} />
+                        <div className={NB.navIcon} />
+                        <Link href="/">
+                            <a className={`${NB.brandContainerM} neutralize-link`}>
+                                <img src="/svg/logo/logoW.svg" className={NB.icon} />
+                                <h2 className={NB.name}>Unilous</h2>
+                            </a>
+                        </Link>
+                    </div>
+                </div>
+            </div>
+        )
+    }   
+    const currentUserUN = localStorage.getItem('username') ? localStorage.getItem('username') : 'fakeUser'
+    const userQuery = useQuery(FIND_USER, {
+        variables: {username: currentUserUN}
+    })
+    const userQueryConditions = () => {
+        const query = userQuery.data
+        const reducer = props.currentUser
+        if (!query) { return null }
+        if (!query.findUser) { return null }
+        if (reducer) {
+            if (query.findUser.username === reducer.username) { return null }
+        }
+        return query.findUser
+    }
+    const userResult = userQueryConditions()
+
+    useEffect(() => {
+        if (userResult) {
+            props.setCurrentUser(userResult)
+        }
+    }, [props, props.currentUser, userResult])
+
+    const search = useField('text')
+    const [subNav, setSubNav] = useState(false)
+    const [subNavItem, setSubNavItem] = useState(false)
+    const handleSubNavState = (state) => {
+        if (state === subNav) {setSubNav(false)}
+        else {setSubNav(state)}
+    }
+    const handleSubNavItemState = (state) => {
+        if (state === subNavItem) {setSubNavItem(false)}
+        else {setSubNavItem(state)}
+    }
+    const logout = () => {
+        localStorage.clear()
+        props.clearToken()
+    }
+
+    const signedState = props.token ? <Signed /> : <NotSigned />
+    const username = props.currentUser ? props.currentUser.username : ''
+    const SubNav = () => {
+        if (!subNav) {return null}
+        else if (subNav === 'search') {
+            return (
+                <div className={NB.subNavContainer}>
+                    <div className={NB.searchContainerM}>
+                        <button className={NB.searchBtn}><img src="/svg/searchWW.svg" className={NB.magnifier} /></button>
+                        <input className={NB.searchBar} placeholder="Search" {...search.fields} />
+                    </div>
+                </div>
+            )
+        }
+        else if (subNav === 'menu') {
+            if (props.noUser) {
+                return (
+                    <div className={NB.subNavContainer}>
+                        <div className={NB.menuContainer}>
+                            <button className={NB.userOption} onClick={() => handleSubNavItemState('notification')} />
+                            <button className={NB.userOption} onClick={() => handleSubNavItemState('user')} />
+                            <button className={NB.moreContainer} onClick={() => handleSubNavItemState('more')} >
+                                <img src="/svg/moreW.svg" className={NB.more} />
+                            </button>
+                        </div>
+                    </div>
+                )
+            }
+            if (props.token) {
+                return (
+                    <div className={NB.subNavContainer}>
+                        <div className={NB.menuContainer}>
+                            <button className={NB.userOption} onClick={() => handleSubNavItemState('notification')}>
+                                <div className={NB.notifContainerM}>
+                                    <img src="/svg/bellW.svg" className={NB.bell} />
+                                    <div className={NB.nofifCount}>-</div>
+                                </div>
+                            </button>
+                            <button className={NB.userOption} onClick={() => handleSubNavItemState('user')}>
+                                <div className={NB.username}>{username}</div>
+                            </button>
+                            <button className={NB.moreContainer} onClick={() => handleSubNavItemState('more')} >
+                                <img src="/svg/moreW.svg" className={NB.more} />
+                            </button>
+                        </div>
+                    </div>
+                )
+            }
+            else {
+                return (
+                    <div className={NB.subNavContainer}>
+                        <div className={NB.menuContainer}>
+                            <button className={NB.signOption} onClick={() => handleSubNavItemState('sign in')} >sign in</button>
+                            <button className={NB.signOption} onClick={() => handleSubNavItemState('register')} >register</button>
+                            <button className={NB.moreContainer} onClick={() => handleSubNavItemState('more')} >
+                                <img src="/svg/moreW.svg" className={NB.more} />
+                            </button>
+                        </div>
+                    </div>
+                )
+            }
+        }
+    }
+
+    const SubNavItem = () => {
+        if (!subNavItem) {return null}
+        if (subNavItem === 'sign in') {
+            return (
+                <div className={NB.SNIContainer}>
+                    <SignIn />
+                </div>
+            )
+        }
+        if (subNavItem === 'register') {
+            return (
+                <div className={NB.SNIContainer}>
+                    <Register />
+                </div>
+            )
+        }
+        if (subNavItem === 'notification') {
+            return (
+                <div className={NB.SNIContainer}>
+                    <img src="/svg/bellW.svg" className={NB.titleBell} />
+                    <UserNotifList />
+                </div>
+            )
+        }
+        if (subNavItem === 'user') {
+            return (
+                <div className={NB.SNIContainer}>
+                    <h2>{props.currentUser.username}</h2>
+                    <Link href="/user/[username]" as={`/user/${decodeURIComponent(props.currentUser.username)}`}>
+                        <a className="neutralize-link" style={{color: 'white'}}><h3 className={NB.ddOption}>account details</h3></a>
+                    </Link>
+                    <h3 className={NB.ddOption} onClick={() => logout()} style={{color: 'rgb(254,52,77)'}}>Sign out</h3>
+                </div>
+            )
+        }
+        if (subNavItem === 'more') {
+            return (
+                <div className={NB.SNIContainer}>
+                    <img src="/svg/moreW.svg" className={NB.titleMore} />
+                    <Link href="/postformpage" >
+                        <a className="neutralize-link" style={{color: 'white'}}><h3 className={NB.ddOption}>create project</h3></a>
+                    </Link>
+                </div>
+            )
+        }
+    }
+ 
+    return (
+        <div>
+            <div className="HWM">
+                <div className={NB.container}>
+                    <Link href="/">
+                        <a className={`${NB.brandContainer} neutralize-link`}>
+                            <img src="/svg/logo/logoW.svg" className={NB.icon} />
+                            <h2 className={NB.name}>Unilous</h2>
+                        </a>
+                    </Link>
+                    <div className={NB.searchContainer}>
+                        <button className={NB.searchBtn}><img src="/svg/searchWW.svg" className={NB.magnifier} /></button>
+                        <input className={NB.searchBar} placeholder="Search" {...search.fields} />
+                    </div>
+                    <Link href="/postformpage">
+                        <a className={`${NB.CPContainer} neutralize-link`}>
+                            <img src="/svg/plusW.svg" className={NB.plus} />
+                            <div className={NB.CPText}>create project</div>
+                        </a>
+                    </Link>
+                    {signedState}
+                </div>
+            </div>
+            <div className="SWM">
+                <div className={NB.containerM}>
+                    <div className={NB.navIcon} />
+                    <div className={NB.navIcon} />
+                    <Link href="/">
+                        <a className={`${NB.brandContainerM} neutralize-link`}>
+                            <img src="/svg/logo/logoW.svg" className={NB.icon} />
+                            <h2 className={NB.name}>Unilous</h2>
+                        </a>
+                    </Link>
+                    <button onClick={() => handleSubNavState('search')} className={NB.navItem}>
+                        <img src="/svg/searchWW.svg" className={NB.navIcon} />
+                    </button>
+                    <button onClick={() => handleSubNavState('menu')} className={NB.navItem}>
+                        <img src="/svg/hamburgerW.svg" className={NB.navIcon} />
+                    </button>
+                    <SubNav />
+                    <SubNavItem />
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const mapStateToProps = (state) => {
+	return {
+        currentUser: state.currentUser,
+        token: state.token,
+        // alertNotif: state.alertNotif
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        clearToken: bindActionCreators(clearToken, dispatch),
+        // resetAlert: bindActionCreators(resetAlert, dispatch),
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NavBar)
