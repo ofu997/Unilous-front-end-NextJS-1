@@ -1,25 +1,22 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import { useQuery, useMutation } from '@apollo/react-hooks'
-import { MAKE_NOTIFICATION, ASK_QUESTION, SAVE_POST } from '../src/schemas/mutations'
-import { GET_POST_TITLES, FIND_POST, Q_AND_A_NOTIFS } from '../src/schemas/queries'
+import { useMutation, useQuery } from '@apollo/react-hooks'
 import Link from 'next/link'
+import { withRouter } from 'next/router'
+import React, { useEffect, useState } from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
+import Layout from '../components/Layout'
 import Loading from '../components/Loading'
-import ppStyle from '../styles/pages/newPostPage.module.css'
-import PostImages from '../components/postPage/PostImages'
-import PostLinks from '../components/postPage/PostLinks'
 import PostQandA from '../components/postPage/PostQandA'
 import InputHeader from '../components/text-field/InputHeader'
-import FormContainer from '../components/text-field/FormContainer'
+import { apolloClient } from '../lib/apollo'
+import { resetAlert, setAlert } from '../redux/reducers/alertNotif'
 import { setCurrentUserSP } from '../redux/reducers/currentUser'
-import { setAlert, resetAlert } from '../redux/reducers/alertNotif'
-import { useField, triggerAlert, palletteGenerator } from '../src/functions/functions'
-import {bindActionCreators} from 'redux'
-import {setToken} from '../redux/reducers/token'
-import apollo, {apolloClient} from '../lib/apollo'
-import {withRouter} from 'next/router'
-import Layout from '../components/Layout'
-import Head from 'next/head'
+import { setToken } from '../redux/reducers/token'
+import { palletteGenerator, triggerAlert, useField } from '../src/functions/functions'
+import { ASK_QUESTION, MAKE_NOTIFICATION, SAVE_POST } from '../src/schemas/mutations'
+import { FIND_POST, Q_AND_A_NOTIFS } from '../src/schemas/queries'
+import indexStyle from '../styles/pages/index.module.css'
+import ppStyle from '../styles/pages/newPostPage.module.css'
 
 const PostPage = withRouter((props) => {
     const [currentPost, setCurrentPost] = useState(props.post)
@@ -269,7 +266,51 @@ const PostPage = withRouter((props) => {
     //     <meta name="keywords" content={`${titleKeywords()} build, team`} />
     // </Helmet>
     return (
-        <Layout>
+        <>
+          <Layout>        
+            <div id='filler' style={{ height: 70 }}></div>
+            <div className={`${indexStyle.container} ${indexStyle.buildYourTeamCreateYourProject}` }>
+              <div className={`${indexStyle.containerItem} ${indexStyle.containerItemText}` }>
+                <h1>Build your team, create your project</h1>
+                <p className={indexStyle.lgPara}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum
+                </p>
+                <div style={{ display: 'flex' }}>
+                  <button className={`${indexStyle.button} ${indexStyle.btnLight} ${indexStyle.adjacentHalfWidthButtons}`}>Choose project to join</button>
+                  <button className={`${indexStyle.button} ${indexStyle.btnLD} ${indexStyle.adjacentHalfWidthButtons}`}>Create new project</button>
+                </div>            
+              </div>
+              <div className={indexStyle.containerItemImage}>
+                <img src='./svg/infoW.svg' alt='build your team' width='100%'></img>
+              </div>
+            </div>
+            <div id='community' className={`${indexStyle.container} ${indexStyle.communityOrProjectsDiv}`}>
+              <div className={indexStyle.containerItemText}>            
+                <h2>Community</h2>
+                <p className={indexStyle.lgPara}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                </p>
+                <button className={` ${indexStyle.button} ${indexStyle.btnDark} ${indexStyle.halfWidthButton}`}>Join</button>     
+              </div>
+              <div className={indexStyle.containerItemImage}>
+                <img src='./svg/usaB.svg' alt='community' width='100%'></img>
+              </div>
+            </div>
+            <div id='projects' className={`${indexStyle.container} ${indexStyle.communityOrProjectsDiv}`}>
+              <div className={indexStyle.containerItemText}>       
+                <h2>Projects</h2>
+                <p className={indexStyle.lgPara}>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                </p>
+                <button className={` ${indexStyle.button} ${indexStyle.btnDark} ${indexStyle.halfWidthButton}`}>Join</button>            
+              </div>
+              <div className={indexStyle.containerItemImage}>
+                <img src='./svg/usaB.svg' alt='projects' width='100%'></img>
+              </div>
+            </div>
+          </Layout>
+        {/* original below */}
+        {/* <Layout>
             <Head>
                 <title>Unilous</title>
                 <meta property="og:image" content="https://i.imgur.com/d6bsnRx.png" key="title" />
@@ -329,7 +370,8 @@ const PostPage = withRouter((props) => {
                     </div>
                 </FormContainer>
             </div>
-        </Layout>
+        </Layout> */}
+        </>
     )
 })
 
