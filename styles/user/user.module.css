@@ -197,9 +197,9 @@
     width: 30px;
 }
 .userFormContainer {
-    grid-column: 1/4;
+    /* grid-column: 1/4; */
     width: 100%;
-    background-color: #484848;
+    /* background-color: #484848; */
 }
 .userForm {
     width: 90%;

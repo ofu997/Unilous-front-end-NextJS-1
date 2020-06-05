@@ -67,6 +67,9 @@ const Register = (props) => {
             email.reset()
             referenceLink.reset()
             triggerAlert('success', 'registered$: account successfully created. signing you in now.', props.setAlert, props.resetAlert)
+            try {
+                props.onSuccess()
+            } catch {}
         }
     }
 

@@ -33,13 +33,15 @@
 }
 .magnifier {
     width: 15px;
-    padding-top: 5px;
     margin: auto;
 }
 .searchBtn {
     border: none;
     background-color: #484848;
     cursor: pointer;
+    width: 100%;
+    height: 100%;
+    display: grid;
 }
 .searchBar {
     width: 100%;
@@ -203,6 +205,9 @@
     background-color: #282828;
     border-bottom-left-radius: 3px;
     border-bottom-right-radius: 3px;
+    max-height: 80vh;
+    overflow-y: scroll;
+    align-self: flex-start;
 }
 .notifContainerM {
     display: grid;

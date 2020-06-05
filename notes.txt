@@ -1,4 +1,7 @@
 Do next (now)
+    add search functionality to newNavBar
+    
+
     add functionality to NewNavBar
     add mobile version to NewNavBar
 

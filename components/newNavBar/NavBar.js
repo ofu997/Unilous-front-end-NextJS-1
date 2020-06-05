@@ -9,9 +9,11 @@ import {bindActionCreators} from 'redux'
 import SignIn from '../user/form/SignIn'
 import Register from '../user/form/Register'
 import {clearToken} from '../../redux/reducers/token'
+import {setCurrentUser} from '../../redux/reducers/currentUser'
 import UserNotifList from '../user/utilities/UserNotifList'
 import { FIND_USER } from '../../schemas/queries'
 import { useQuery } from '@apollo/react-hooks'
+import Router from 'next/router'
 
 const NavBar = (props) => {
     if (props.noUser) {
@@ -41,7 +43,8 @@ const NavBar = (props) => {
                 </div>
             </div>
         )
-    }   
+    }
+    const searchQuery = useField('text')
     const currentUserUN = localStorage.getItem('username') ? localStorage.getItem('username') : 'fakeUser'
     const userQuery = useQuery(FIND_USER, {
         variables: {username: currentUserUN}
@@ -64,9 +67,31 @@ const NavBar = (props) => {
         }
     }, [props, props.currentUser, userResult])
 
-    const search = useField('text')
     const [subNav, setSubNav] = useState(false)
     const [subNavItem, setSubNavItem] = useState(false)
+    const resetNav = () => {
+        setSubNav(false)
+        setSubNavItem(false)
+    }
+
+    const SQCleaned = searchQuery.fields.value === '' ? 'all' : searchQuery.fields.value
+
+    const enterSearch = () => {
+        Router.push(`/results/${SQCleaned}`)
+        resetNav()
+    }
+
+    const handleKeyPress = (e, noState) => {
+        if (event.key === 'Enter') {
+            if (noState) {
+                const SQ = e.target.value === '' ? 'all' : e.target.value
+                Router.push(`/results/${SQ}`)
+                resetNav()
+            }
+            else {enterSearch()}
+        }
+    }
+
     const handleSubNavState = (state) => {
         if (state === subNav) {setSubNav(false)}
         else {setSubNav(state)}
@@ -78,6 +103,7 @@ const NavBar = (props) => {
     const logout = () => {
         localStorage.clear()
         props.clearToken()
+        resetNav()
     }
 
     const signedState = props.token ? <Signed /> : <NotSigned />
@@ -88,8 +114,10 @@ const NavBar = (props) => {
             return (
                 <div className={NB.subNavContainer}>
                     <div className={NB.searchContainerM}>
-                        <button className={NB.searchBtn}><img src="/svg/searchWW.svg" className={NB.magnifier} /></button>
-                        <input className={NB.searchBar} placeholder="Search" {...search.fields} />
+                        <Link href="/results/[searchQuery]" as={`/results/${SQCleaned}`}>
+                            <a className={NB.searchBtn}><img src="/svg/searchWW.svg" className={NB.magnifier} /></a>
+                        </Link>
+                        <input id="search" className={NB.searchBar} placeholder="Search" onKeyPress={(e) => handleKeyPress(e, true)} />
                     </div>
                 </div>
             )
@@ -149,14 +177,14 @@ const NavBar = (props) => {
         if (subNavItem === 'sign in') {
             return (
                 <div className={NB.SNIContainer}>
-                    <SignIn />
+                    <SignIn onSuccess={resetNav} />
                 </div>
             )
         }
         if (subNavItem === 'register') {
             return (
                 <div className={NB.SNIContainer}>
-                    <Register />
+                    <Register onSuccess={resetNav}/>
                 </div>
             )
         }
@@ -172,7 +200,7 @@ const NavBar = (props) => {
             return (
                 <div className={NB.SNIContainer}>
                     <h2>{props.currentUser.username}</h2>
-                    <Link href="/user/[username]" as={`/user/${decodeURIComponent(props.currentUser.username)}`}>
+                    <Link onClick={() => resetNav()} href="/user/[username]" as={`/user/${decodeURIComponent(props.currentUser.username)}`}>
                         <a className="neutralize-link" style={{color: 'white'}}><h3 className={NB.ddOption}>account details</h3></a>
                     </Link>
                     <h3 className={NB.ddOption} onClick={() => logout()} style={{color: 'rgb(254,52,77)'}}>Sign out</h3>
@@ -183,7 +211,7 @@ const NavBar = (props) => {
             return (
                 <div className={NB.SNIContainer}>
                     <img src="/svg/moreW.svg" className={NB.titleMore} />
-                    <Link href="/postformpage" >
+                    <Link onClick={() => resetNav()} href="/postformpage" >
                         <a className="neutralize-link" style={{color: 'white'}}><h3 className={NB.ddOption}>create project</h3></a>
                     </Link>
                 </div>
@@ -202,8 +230,10 @@ const NavBar = (props) => {
                         </a>
                     </Link>
                     <div className={NB.searchContainer}>
-                        <button className={NB.searchBtn}><img src="/svg/searchWW.svg" className={NB.magnifier} /></button>
-                        <input className={NB.searchBar} placeholder="Search" {...search.fields} />
+                        <Link href="/results/[searchQuery]" as={`/results/${SQCleaned}`}>
+                            <a className={NB.searchBtn}><img src="/svg/searchWW.svg" className={NB.magnifier} /></a>
+                        </Link>
+                        <input className={NB.searchBar} placeholder="Search" onKeyPress={(e) => handleKeyPress(e)} {...searchQuery.fields} />
                     </div>
                     <Link href="/postformpage">
                         <a className={`${NB.CPContainer} neutralize-link`}>
@@ -225,7 +255,9 @@ const NavBar = (props) => {
                         </a>
                     </Link>
                     <button onClick={() => handleSubNavState('search')} className={NB.navItem}>
-                        <img src="/svg/searchWW.svg" className={NB.navIcon} />
+                        <label htmlFor="search">
+                            <img src="/svg/searchWW.svg" className={NB.navIcon} />
+                        </label>
                     </button>
                     <button onClick={() => handleSubNavState('menu')} className={NB.navItem}>
                         <img src="/svg/hamburgerW.svg" className={NB.navIcon} />
@@ -249,6 +281,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         clearToken: bindActionCreators(clearToken, dispatch),
+        setCurrentUser: bindActionCreators(setCurrentUser, dispatch),
         // resetAlert: bindActionCreators(resetAlert, dispatch),
     }
 }

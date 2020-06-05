@@ -39,6 +39,9 @@ const SignIn = (props) => {
             username.reset()
             password.reset()
             props.setToken(token)
+            try {
+                props.onSuccess()
+            } catch {}
         }
     }
 
