@@ -61,6 +61,8 @@ const Post = (props) => {
     cleanedTime = cleanedTime.toString().split(' ')
     // cleanedTime = cleanedTime.slice(1,4).join(' ') + ' ' + cleanedTime[4].split(':').slice(0,2).join(':')
     cleanedTime = cleanedTime.slice(1,3).join(' ') + ', ' + cleanedTime[3]
+
+    const descriptionHeight = props.short ? {maxHeight: '75px'} : null
     if (props.stretch) {
         return (
             <div className={PS.postWrapper}>
@@ -91,7 +93,7 @@ const Post = (props) => {
                         <a className="neutralize-link"><h3 className={`${PS.postTitle} ${PS.postHover}`}>{post.title}</h3></a>
                     </Link>
                     <Link href="/post/[title]" as={`/post/${encodeURIComponent(post.title)}`}>
-                        <a className={`${PS.postDescription} neutralize-link ${PS.postHover}`}>{post.description}</a>
+                        <a className={`${PS.postDescription} neutralize-link ${PS.postHover}`} style={descriptionHeight}>{post.description}</a>
                     </Link>
                     <div className={PS.postSkillsContainer}>
                         {mappedSkills()}
@@ -117,7 +119,7 @@ const Post = (props) => {
                     <a className="neutralize-link"><h3 className={`${PS.postTitle} ${PS.postHover}`}>{post.title}</h3></a>
                 </Link>
                 <Link href="/post/[title]" as={`/post/${encodeURIComponent(post.title)}`} >
-                    <a className={`${PS.postDescription} neutralize-link ${PS.postHover}`}>{post.description}</a>
+                    <a className={`${PS.postDescription} neutralize-link ${PS.postHover}`} style={descriptionHeight}>{post.description}</a>
                 </Link>
                 <div className={PS.postSkillsContainer}>
                     {mappedSkills()}
