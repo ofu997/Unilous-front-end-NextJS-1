@@ -12,8 +12,9 @@ const HomePage = (props) => {
     return (
         <Layout>
             <Head>
-                <title>Contact | Unilous</title>
-                <meta name="description" content="Contact the Unilous team" key="description"/>
+                <title>Unilous</title>
+                <meta property="og:image" content="https://i.imgur.com/d6bsnRx.png" key="title" />
+                <meta name="description" content="Looking to join or make a team, Unilous will help you make it happen! Join our skilled community of people looking to make something great." key="description"/>
             </Head>
             <div className="navbar-height" />
             <div className={`${HP.rowContainer} ${HP.buildYourTeamCreateYourProject}`}>
