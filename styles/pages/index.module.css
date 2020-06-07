@@ -1,0 +1,103 @@
+/* Here is the button HTML and CSS:
+<button class="button btnDark">Lorem</button>
+<button class="button btnLight">Lorem</button>
+<button class="button btnLD">Lorem</button> */
+.button {
+border-radius: 3px;
+border: 2px solid;
+width: 100%;
+padding-top: 15px;
+padding-bottom: 15px;
+font-size: 20px;
+}
+.btnDark {
+background-color: #282828;
+color: white;
+border-color: #282828;
+}
+.btnLight {
+background-color: white;
+color: #282828;
+border-color: white;
+}
+.btnLD {
+background-color: #282828;
+color: white;
+border-color: white;
+}
+
+/* Here is the header HTML and CSS:
+<h1>Lorem</h1>
+<h2>Lorem</h2>
+
+Here is the paragraph HTML and CSS:
+<p class="lgPara">Lorem</p> */
+.lgPara {
+font-size: 20px;
+}
+
+/* Here is the link HTML and CSS:
+<a href="" className="linkDark">Lorem</a>
+<a href="" className="linkLight">Lorem</a> */
+.linkDark {
+color: #282828;
+font-weight: bold;
+}
+.linkLight {
+color: white;
+font-weight: bold;
+}
+
+/* OF changes */
+.container {
+  width: 100%;
+  height: auto; 
+  display: flex; 
+  flex-direction: row;
+  justify-content: center;
+  flex-flow: wrap;
+  align-items: center, 
+}
+
+.containerItemImage {
+  width: 33%;
+}
+
+.containerItemImage img {
+  margin: 10% 10%; 
+}
+
+.containerItemText {
+  width: 25%;
+}
+
+.adjacentHalfWidthButtons {
+  width: 50%; 
+  margin: 0px 2px;
+}
+
+.halfWidthButton {
+  width: 50%; 
+}
+
+.buildYourTeamCreateYourProject {
+  padding: 10px;
+  background-color: #282828;
+  color: white; 
+}
+
+.communityOrProjectsDiv {
+  padding: 10px;
+  background-color: white;
+}
+
+@media screen and (max-width: 1000px) {
+  .containerItemText, .containerItemImage {
+      width: 40%; 
+  }
+}
+@media screen and (max-width: 600px) {
+  .containerItemText, .containerItemImage {
+      width: 100%; 
+  }
+}

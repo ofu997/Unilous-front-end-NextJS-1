@@ -1,0 +1,128 @@
+.button {
+border-radius: 3px;
+border: 2px solid;
+width: 100%;
+padding-top: 15px;
+padding-bottom: 15px;
+font-size: 20px;
+}
+.btnDark {
+background-color: #282828;
+color: white;
+border-color: #282828;
+}
+.btnLight {
+background-color: white;
+color: #282828;
+border-color: white;
+}
+.btnLD {
+background-color: #282828;
+color: white;
+border-color: white;
+}
+
+.lgPara {
+font-size: 20px;
+}
+
+.linkDark {
+color: #282828;
+font-weight: bold;
+}
+
+.linkLight {
+color: white;
+font-weight: bold;
+}
+
+/* OF changes */
+
+.leftAlign {
+  text-align: left;
+}
+
+.container {
+  width: 100%;
+  height: auto; 
+  display: flex; 
+  flex-direction: row;
+  justify-content: center;
+  flex-flow: wrap;
+  align-content: center, 
+}
+
+.imageBox {
+  margin: 50px 15px; 
+  display: flex;
+  align-content: center;
+}
+
+.textBox {
+  margin: 50px 15px; 
+}
+
+.narrow {
+  width: 25%;
+}
+
+.wide {
+  width: 33%;
+}
+
+.containerWide p, .containerNarrow p {
+  margin: 40px 0px;
+}
+
+.adjacentHalfWidthButtons {
+  width: 50%; 
+  margin: 0px 2px;
+}
+
+.halfWidthButton {
+  width: 50%; 
+}
+
+.buildYourTeamCreateYourProject {
+  padding: 10px;
+  background-color: #282828;
+  color: white; 
+}
+
+.buildYourTeamImage {
+  display: flex;
+  align-content: center;
+}
+
+.buildYourTeamOuterBox {
+  padding-left: 2%;
+  display: flex;
+  align-content: center;
+}
+
+.buildYourTeamInnerBox {
+  background-color: white;
+  padding: 10%;
+}
+
+.communityOrProjectsDiv {
+  padding: 10px;
+  background-color: white;
+}
+
+.projectImages {
+  display: flex;
+  align-content: center;
+  justify-content: space-evenly;
+}
+
+@media screen and (max-width: 1000px) {
+  .textBox, .imageBox {
+      width: 40%; 
+  }
+}
+@media screen and (max-width: 600px) {
+  .textBox, .imageBox {
+      width: 100%; 
+  }
+}
