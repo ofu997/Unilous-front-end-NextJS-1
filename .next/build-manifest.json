@@ -24,11 +24,11 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/index": [
+    "/homePage": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/results/[searchQuery]": [
+    "/index": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
