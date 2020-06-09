@@ -22,9 +22,11 @@ const HomePage = (props) => {
         </Link>
     ))
 
-    const positionInCP = props.currentUser ? 
-        props.currentUser.posts.length ? 2 :
-        props.currentUser ? 1 : 0
+    const positionInCP = props.currentUser ?
+        props.token ? 
+            props.currentUser.posts.length ? 2 :
+            props.currentUser ? 1 : 0
+        : 0
     : 0
     const buttonsForCP = [
         <div style={{ display: 'flex' }}>
@@ -43,12 +45,13 @@ const HomePage = (props) => {
         positionInCP >= 2 ? {color: 'rgb(52,166,95)'} : null,
         positionInCP >= 3 ? {color: 'rgb(52,166,95)'} : null,
     ]
-
-
+    console.log(props.currentUser)
 
     const positionInJP = props.currentUser ? 
-        props.currentUser.notifications.length ? 3 :
-        props.currentUser ? 1 : 0
+        props.token ? 
+            props.currentUser.notifications.length ? 3 :
+            props.currentUser ? 1 : 0
+        : 0
     : 0
     const buttonsForJP = [
         <div style={{ display: 'flex' }}>
