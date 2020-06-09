@@ -20,12 +20,14 @@
     opacity: 0.85;
 }
 .button {
+    cursor: pointer;
     border-radius: 3px;
     border: 2px solid;
     width: 100%;
     padding-top: 15px;
     padding-bottom: 15px;
     font-size: 20px;
+    text-align: center;
 }
 .btnDark {
     background-color: #282828;
@@ -42,13 +44,17 @@
     color: white;
     border-color: white;
 }
+.btnDL {
+  background-color: white;
+  color: #282828;
+  border-color: #282828;
+}
 .linkDark {
     color: #282828;
-    font-weight: bold;
+    font-size: 20px;
 }
 .linkLight {
     color: white;
-    font-weight: bold;
 }
 
 
@@ -115,6 +121,7 @@
   
   .cardListItem {
     margin-bottom: 10px;
+    font-weight: bold;
   }
   
   .cardListNumber {
@@ -130,6 +137,7 @@
 
 .leftAlign {
   text-align: left;
+  margin-left: 0;
 }
 .imageBox {
   display: flex;
@@ -243,7 +251,7 @@
   }
 }
 .userIns {
-
+  color: #282828
 }
 .userPrimary {
   font-size: 20px;

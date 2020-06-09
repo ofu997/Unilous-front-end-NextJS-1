@@ -14,6 +14,7 @@ import UserNotifList from '../user/utilities/UserNotifList'
 import { FIND_USER } from '../../schemas/queries'
 import { useQuery } from '@apollo/react-hooks'
 import Router from 'next/router'
+import {setUserDD, resetUserDD} from '../../redux/reducers/userDD'
 
 const NavBar = (props) => {
     if (props.noUser) {
@@ -68,10 +69,14 @@ const NavBar = (props) => {
     }, [props, props.currentUser, userResult])
 
     const [subNav, setSubNav] = useState(false)
-    const [subNavItem, setSubNavItem] = useState(false)
+    if (props.userDD) {
+        if (!subNav) {
+            setSubNav('menu')
+        }
+    }
     const resetNav = () => {
         setSubNav(false)
-        setSubNavItem(false)
+        props.resetUserDD()
     }
 
     const SQCleaned = searchQuery.fields.value === '' ? 'all' : searchQuery.fields.value
@@ -97,8 +102,8 @@ const NavBar = (props) => {
         else {setSubNav(state)}
     }
     const handleSubNavItemState = (state) => {
-        if (state === subNavItem) {setSubNavItem(false)}
-        else {setSubNavItem(state)}
+        if (state === props.userDD) {props.resetUserDD()}
+        else {props.setUserDD(state)}
     }
     const logout = () => {
         localStorage.clear()
@@ -160,7 +165,7 @@ const NavBar = (props) => {
                 return (
                     <div className={NB.subNavContainer}>
                         <div className={NB.menuContainer}>
-                            <button className={NB.signOption} onClick={() => handleSubNavItemState('sign in')} >sign in</button>
+                            <button className={NB.signOption} onClick={() => handleSubNavItemState('signin')} >sign in</button>
                             <button className={NB.signOption} onClick={() => handleSubNavItemState('register')} >register</button>
                             <button className={NB.moreContainer} onClick={() => handleSubNavItemState('more')} >
                                 <img src="/svg/moreW.svg" className={NB.more} />
@@ -173,22 +178,22 @@ const NavBar = (props) => {
     }
 
     const SubNavItem = () => {
-        if (!subNavItem) {return null}
-        if (subNavItem === 'sign in') {
+        if (!props.userDD) {return null}
+        if (props.userDD === 'signin') {
             return (
                 <div className={NB.SNIContainer}>
                     <SignIn onSuccess={resetNav} />
                 </div>
             )
         }
-        if (subNavItem === 'register') {
+        if (props.userDD === 'register') {
             return (
                 <div className={NB.SNIContainer}>
                     <Register onSuccess={resetNav}/>
                 </div>
             )
         }
-        if (subNavItem === 'notification') {
+        if (props.userDD === 'notification') {
             return (
                 <div className={NB.SNIContainer}>
                     <img src="/svg/bellW.svg" className={NB.titleBell} />
@@ -196,7 +201,7 @@ const NavBar = (props) => {
                 </div>
             )
         }
-        if (subNavItem === 'user') {
+        if (props.userDD === 'user') {
             return (
                 <div className={NB.SNIContainer}>
                     <h2>{props.currentUser.username}</h2>
@@ -207,7 +212,7 @@ const NavBar = (props) => {
                 </div>
             )
         }
-        if (subNavItem === 'more') {
+        if (props.userDD === 'more') {
             return (
                 <div className={NB.SNIContainer}>
                     <img src="/svg/moreW.svg" className={NB.titleMore} />
@@ -274,6 +279,7 @@ const mapStateToProps = (state) => {
 	return {
         currentUser: state.currentUser,
         token: state.token,
+        userDD: state.userDD,
         // alertNotif: state.alertNotif
 	}
 }
@@ -282,7 +288,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         clearToken: bindActionCreators(clearToken, dispatch),
         setCurrentUser: bindActionCreators(setCurrentUser, dispatch),
-        // resetAlert: bindActionCreators(resetAlert, dispatch),
+        setUserDD: bindActionCreators(setUserDD, dispatch),
+        resetUserDD: bindActionCreators(resetUserDD, dispatch),
     }
 }
 

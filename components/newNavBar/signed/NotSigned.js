@@ -5,17 +5,18 @@ import Link from 'next/link'
 import {bindActionCreators} from 'redux'
 import Register from '../../user/form/Register'
 import SignIn from '../../user/form/SignIn'
+import {setUserDD, resetUserDD} from '../../../redux/reducers/userDD'
 
 const NotSigned = (props) => {
-    const [userState, setUserState] = useState(false)
     const handleUserState = (state) => {
-        if (state === userState) {setUserState(false)}
-        else {setUserState(state)}
+        if (state === props.userDD) {props.resetUserDD()}
+        else {props.setUserDD(state)}
     }
 
-    const showUserDD = userState ? {display: 'block'} : {display: 'none'}
-    const showInDD = userState ? 
-        userState === 'register' ? <Register /> : <SignIn />
+    const showUserDD = props.userDD ? {display: 'block'} : {display: 'none'}
+    const showInDD = props.userDD ? 
+        props.userDD === 'register' ? <Register /> :
+        props.userDD === 'signin' ? <SignIn /> : null
     : null
    
     return (
@@ -36,14 +37,14 @@ const mapStateToProps = (state) => {
 	return {
         currentUser: state.currentUser,
         token: state.token,
-        // alertNotif: state.alertNotif
+        userDD: state.userDD,
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        // clearToken: bindActionCreators(clearToken, dispatch),
-        // resetAlert: bindActionCreators(resetAlert, dispatch),
+        setUserDD: bindActionCreators(setUserDD, dispatch),
+        resetUserDD: bindActionCreators(resetUserDD, dispatch),
     }
 }
 
