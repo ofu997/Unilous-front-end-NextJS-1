@@ -9,12 +9,12 @@ import eventSearch from './reducers/eventSearch'
 import userDD from './reducers/userDD'
 
 const bindMiddleware = middleware => {
-    if (process.env.NODE_ENV !== 'production') {
-      const { composeWithDevTools } = require('redux-devtools-extension')
-      return composeWithDevTools(applyMiddleware(...middleware))
-    }
-    return applyMiddleware(...middleware)
+  if (process.env.NODE_ENV !== 'production') {
+    const { composeWithDevTools } = require('redux-devtools-extension')
+    return composeWithDevTools(applyMiddleware(...middleware))
   }
+  return applyMiddleware(...middleware)
+}
 
 const reducers = combineReducers({
     token,

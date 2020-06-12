@@ -3,8 +3,7 @@ import { Provider } from 'react-redux'
 import withRedux from 'next-redux-wrapper'
 import initStore from '../redux/store'
 import {compose} from 'redux'
-import withApollo, {apolloClient} from '../lib/apollo'
-import { ApolloProvider } from "@apollo/react-hooks"
+import withApollo from '../lib/apollo'
 import '../styles/base.css'
 import '../styles/notifs.css'
 
