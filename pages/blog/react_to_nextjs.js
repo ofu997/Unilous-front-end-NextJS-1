@@ -145,8 +145,9 @@ return (
     return (
         <Layout>
             <Head>
-                <title>Contact | Unilous</title>
-                <meta name="description" content="Contact the Unilous team" key="description"/>
+                <title>Converting a React app with Redux and Apollo to Next.JS | Unilous</title>
+                <meta property="og:image" content="https://i.imgur.com/mW3nk8o.jpg" key="title" />
+                <meta name="description" content="I will cover the key changes I had to make when converting my React application with both Redux (state management) and Apollo (GraphQL API), to Next.JS." key="description"/>
             </Head>
             <div className="navbar-height" />
             <article className={B.container}>
