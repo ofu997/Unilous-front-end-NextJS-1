@@ -28,6 +28,11 @@ const NavBar = (props) => {
                                 <h2 className={NB.name}>Unilous</h2>
                             </a>
                         </Link>
+                        <Link href="/blog">
+                            <a className={`neutralize-link`}>
+                                <div className={NB.CPText}>blogs</div>
+                            </a>
+                        </Link>
                     </div>
                 </div>
                 <div className="SWM">
@@ -38,6 +43,11 @@ const NavBar = (props) => {
                             <a className={`${NB.brandContainerM} neutralize-link`}>
                                 <img src="/svg/logo/logoW.svg" className={NB.icon} />
                                 <h2 className={NB.name}>Unilous</h2>
+                            </a>
+                        </Link>
+                        <Link href="/blog">
+                            <a className={`neutralize-link`}>
+                                <div className={NB.CPText}>blogs</div>
                             </a>
                         </Link>
                     </div>
@@ -219,6 +229,9 @@ const NavBar = (props) => {
                     <Link onClick={() => resetNav()} href="/postformpage" >
                         <a className="neutralize-link" style={{color: 'white'}}><h3 className={NB.ddOption}>create project</h3></a>
                     </Link>
+                    <Link onClick={() => resetNav()} href="/blog">
+                        <a className="neutralize-link" style={{color: 'white'}}><h3 className={NB.ddOption}>blogs</h3></a>
+                    </Link>
                 </div>
             )
         }
@@ -247,6 +260,11 @@ const NavBar = (props) => {
                         </a>
                     </Link>
                     {signedState}
+                    <Link href="/blog">
+                        <a className={`neutralize-link`}>
+                            <div className={NB.CPText}>blogs</div>
+                        </a>
+                    </Link>
                 </div>
             </div>
             <div className="SWM">
