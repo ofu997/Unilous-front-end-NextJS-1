@@ -145,11 +145,6 @@ const Results = withRouter((props) => {
             </Head>
             <div className="home-wrapper">
                 <div className={resStyle.resultsContainer}>
-                    <Link href="/postformpage" >
-                        <a className={`${resStyle.formContainerExpand} standard-hover neutralize-link`} title="add post">
-                            <img className={resStyle.formExpandIcon} src="/svg/plusW.svg" alt="team up" />
-                        </a>
-                    </Link>
                     <div className="navbar-height"/>
                     {/* <h2 className={resStyle.secondaryTitle}>events</h2>
                     <div className={`${resStyle.eventsContainer} ${eventsContainerClass}`}>
