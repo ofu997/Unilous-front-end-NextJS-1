@@ -31,10 +31,6 @@
     "/results/[searchQuery]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
-    ],
-    "/user/[username]": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
     ]
   }
 }

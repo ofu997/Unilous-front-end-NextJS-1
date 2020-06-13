@@ -10,6 +10,7 @@ import Post from '../components/post/Post'
 import Link from 'next/link'
 import {bindActionCreators} from 'redux'
 import {setUserDD} from '../redux/reducers/userDD'
+import {setSearchFor} from '../redux/reducers/searchFor'
 
 const HomePage = (props) => {
 
@@ -138,7 +139,7 @@ const HomePage = (props) => {
                         Unilous does the networking so you don't need to. We provide you with access to all of our talented users by directly browsing our users or indirectly posting projects for all of the potentially interested users to see. The Unilous community although with different interests and skill sets are all looking to create and be part of something great.
                         </p>
                         <div style={{display: 'flex'}}>
-                            <Link href="/results/[searchQuery]" as="/results/all"><a className={`${HP.button} ${HP.btnDark} ${HP.adjacentHalfWidthButtons} neutralize-link`}>Browse users</a></Link>     
+                            <Link href="/results/[searchQuery]" as="/results/all"><a onClick={() => props.setSearchFor('users')} className={`${HP.button} ${HP.btnDark} ${HP.adjacentHalfWidthButtons} neutralize-link`}>Browse users</a></Link>     
                         </div>
                     </div>
                     <div className={`${HP.imageBox} ${HP.narrow}`}>
@@ -149,8 +150,8 @@ const HomePage = (props) => {
                             </div>
                             <div className={HP.usersContainer}>
                                 {listOfUsers}
+                                <div className={HP.userPrimary} style={{textAlign: 'center', gridColumn: '1/3'}}>...</div>
                             </div>
-                            <div className={HP.userFooter}>more...</div>
                         </div>
                     </div>
                 </div>
@@ -214,6 +215,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         setUserDD: bindActionCreators(setUserDD, dispatch),
+        setSearchFor: bindActionCreators(setSearchFor, dispatch),
     }
 }
 
