@@ -186,7 +186,6 @@ const NavBar = (props) => {
             }
         }
     }
-    console.log(props.userDD)
     const SubNavItem = () => {
         if (!props.userDD) {return null}
         if (props.userDD === 'signin') {

@@ -24,11 +24,15 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/blog/react_to_nextjs": [
+    "/index": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/index": [
+    "/results/[searchQuery]": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/user/[username]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

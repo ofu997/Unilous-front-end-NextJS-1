@@ -7,6 +7,7 @@ import alertNotif from './reducers/alertNotif'
 import stretchLayout from './reducers/stretchLayout'
 import eventSearch from './reducers/eventSearch'
 import userDD from './reducers/userDD'
+import searchFor from './reducers/searchFor'
 
 const bindMiddleware = middleware => {
   if (process.env.NODE_ENV !== 'production') {
@@ -24,6 +25,7 @@ const reducers = combineReducers({
     stretchLayout,
     eventSearch,
     userDD,
+    searchFor,
 })
 
 const store = () => createStore(reducers, bindMiddleware([thunkMiddleware]))

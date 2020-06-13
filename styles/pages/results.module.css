@@ -105,11 +105,46 @@
         margin: auto;
     }
 }
+.resOptionsContainer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 400px auto;
+    flex-direction: row;
+}
+.SFContainer {
+    display: grid;
+    grid-template-columns: 200px 200px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.SFOption {
+    color: #282828;
+    margin: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: 2px solid #282828;
+    cursor: pointer;
+    overflow: hidden;
+}
+.SFOLeft {
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+.SFORight {
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+}
+.SFSelected {
+    background-color: #282828;
+    color: white;
+}
+.userIns {
+    color: #282828;
+}
 .layoutWrapper {
     justify-self: end;
     border-radius: 3px;
     margin: 5px;
-    margin-right: 5%;
 }
 .layoutWrapper:hover {
     cursor: pointer;
@@ -162,8 +197,8 @@
     column-gap: 10px;
 }
 .resultsContentStretch {
-    width: 95%;
-    margin-right: 5%;
+    width: 100%;
+    /* margin-right: 5%; */
     display: grid;
     grid-template-columns: 1fr;
 }

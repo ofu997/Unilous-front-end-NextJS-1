@@ -3,13 +3,14 @@ import { connect } from 'react-redux'
 import resStyle from '../../styles/pages/results.module.css'
 import Post from '../../components/post/Post'
 import { useQuery } from '@apollo/react-hooks'
-import { SEARCH_POSTS } from '../../schemas/queries'
+import { SEARCH_POSTS, ALL_USERS } from '../../schemas/queries'
 import { addPosts } from '../../redux/reducers/posts'
 import Link from 'next/link'
 import Loading from '../../components/Loading'
 import { palletteGenerator } from '../../functions/functions'
 import { toggleStretchLayout } from '../../redux/reducers/stretchLayout'
 import { setEventSearch } from '../../redux/reducers/eventSearch'
+import { setSearchFor } from '../../redux/reducers/searchFor'
 import {bindActionCreators} from 'redux'
 import {withRouter} from 'next/router'
 import {apolloClient} from '../../lib/apollo'
@@ -86,6 +87,13 @@ const Results = withRouter((props) => {
     }
     const postsArray = SPQuery.data ? SPQuery.data.searchPosts.map(p => p) : props.initialPosts
     const postsToShow = postsArray ?  postsArray.map(p => <Post stretch={props.stretchLayout} key={`post${p._id}`} post={p} />) : []
+    const usersToShow = props.allUsers.map(u => (
+        <Link href="/user/[username]" as={`/user/${encodeURIComponent(u.username)}`}>
+            <a className={`${resStyle.userIns} neutralize-link`}>
+                <h2 style={{textAlign: 'start'}}>{u.username}</h2>
+            </a>
+        </Link>
+    ))
     const pallette = palletteGenerator('rgb(40,40,40)').colorPallette
     const layoutBtnClass= props.stretchLayout ? resStyle.layoutButtonGrid : resStyle.layoutButtonStretch
     const layoutClass = !props.stretchLayout ? resStyle.resultsContentGrid : resStyle.resultsContentStretch
@@ -125,6 +133,10 @@ const Results = withRouter((props) => {
 
         return dFinal
     }
+    const optionSelected = props.searchFor === 'projects' ?
+        {projects: resStyle.SFSelected, users: null} : {projects: null, users: resStyle.SFSelected}
+    const showUsersOrProject = props.searchFor === 'projects' ? postsToShow : usersToShow
+    
     return (
         <Layout>
             <Head>
@@ -143,19 +155,25 @@ const Results = withRouter((props) => {
                     <div className={`${resStyle.eventsContainer} ${eventsContainerClass}`}>
                         {eventsHTML}
                     </div> */}
-                    <div onClick={() => props.toggleStretchLayout(!props.stretchLayout)} className={resStyle.layoutWrapper}>
-                        <div className={resStyle.layoutContainer}>
-                            <div className={`layoutButton ${layoutBtnClass}`} >
-                                <div className={resStyle.layoutBox}/>
-                                <div className={resStyle.layoutBox}/>
-                                <div className={resStyle.layoutBox}/>
-                                <div className={resStyle.layoutBox}/>
+                    <div className={resStyle.resOptionsContainer}>
+                        <div className={resStyle.SFContainer}>
+                            <h3 onClick={() => props.setSearchFor('projects')} className={`${resStyle.SFOption} ${optionSelected.projects} ${resStyle.SFOLeft}`}>projects</h3>
+                            <h3 onClick={() => props.setSearchFor('users')} className={`${resStyle.SFOption} ${optionSelected.users} ${resStyle.SFORight}`}>users</h3>
+                        </div>
+                        <div onClick={() => props.toggleStretchLayout(!props.stretchLayout)} className={resStyle.layoutWrapper}>
+                            <div className={resStyle.layoutContainer}>
+                                <div className={`layoutButton ${layoutBtnClass}`} >
+                                    <div className={resStyle.layoutBox}/>
+                                    <div className={resStyle.layoutBox}/>
+                                    <div className={resStyle.layoutBox}/>
+                                    <div className={resStyle.layoutBox}/>
+                                </div>
                             </div>
                         </div>
                     </div>
                     <div />
                     <div className={`resultsContent ${layoutClass}`}>
-                        {postsToShow}
+                        {showUsersOrProject}
                     </div>
                     <div style={{position: 'relative', height: '400px'}}>
                         {showLoading}
@@ -189,8 +207,12 @@ Results.getInitialProps = async (context) => {
             eventQuery: null,
         }
     }).catch(err => console.log(err))
+    const usersQuery = await apolloClient.query({
+        query: ALL_USERS,
+    }).catch(err => console.log(err))
     return {
-        initialPosts: postsQuery.data.searchPosts
+        initialPosts: postsQuery.data.searchPosts,
+        allUsers: usersQuery.data.allUsers
     }
 }
 
@@ -200,6 +222,7 @@ const mapStateToProps = (state) => {
         posts: state.posts,
         stretchLayout: state.stretchLayout,
         eventSearch: state.eventSearch,
+        searchFor: state.searchFor,
 	}
 }
 const mapDispatchToProps = (dispatch) => {
@@ -207,6 +230,7 @@ const mapDispatchToProps = (dispatch) => {
         addPosts: bindActionCreators(addPosts, dispatch),
         toggleStretchLayout: bindActionCreators(toggleStretchLayout, dispatch),
         setEventSearch: bindActionCreators(setEventSearch, dispatch),
+        setSearchFor: bindActionCreators(setSearchFor, dispatch),
     }
 }
 
