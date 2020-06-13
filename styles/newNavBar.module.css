@@ -53,7 +53,7 @@
 }
 .CPContainer {
     display: grid;
-    grid-template-columns: 24px auto;
+    grid-template-columns: 24px 1fr;
 }
 .plus {
     width: 15px;

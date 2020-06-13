@@ -24,7 +24,7 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/blog": [
+    "/blog/react_to_nextjs": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
