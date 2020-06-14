@@ -1,6 +1,7 @@
 Do next (now)
+    add dropzone to images in postformpage
+
     add search functionality to newNavBar
-    
 
     add functionality to NewNavBar
     add mobile version to NewNavBar

@@ -6,6 +6,7 @@ import {compose} from 'redux'
 import withApollo from '../lib/apollo'
 import '../styles/base.css'
 import '../styles/notifs.css'
+import '../styles/pages/test.css'
 
 const MyApp = ({ Component, pageProps, store }) => {
   return (

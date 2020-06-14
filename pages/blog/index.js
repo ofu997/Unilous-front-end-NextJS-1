@@ -1,22 +1,40 @@
+import Head from 'next/head'
 import React from 'react'
 import { connect } from 'react-redux'
+import BlogPost from '../../components/blog/BlogPost'
 import Layout from '../../components/Layout'
-import Head from 'next/head'
-import Link from 'next/link'
+
+const blogs=[
+    {    
+        id: 1,
+        title: 'Converting a React application with Redux and Apollo to Next.JS (2020)',
+        image: 'https://i.imgur.com/mW3nk8o.jpg',
+        link: '/blog/react_to_nextjs',
+        author: 'SebastianSosa',
+        date: 'June 12, 2020',
+        description: 'Although Next.JS is already built on the shoulders of React, there are still many challenges which need to be overcome before getting the application up and running. For this guide I will touch on the key changes I had to make when converting my React application with the centralized state management: Redux, and the GraphQL API: Apollo, to Next.JS.',
+    },
+]
 
 const BlogIndex = () => {
     return (
         <Layout>
             <Head>
-                <title>Blogs | Unilous</title>
+                <title>Blog | Unilous</title>
                 <meta name="description" content="Contact the Unilous team" key="description"/>
             </Head>
             <div className="navbar-height" />
-            <Link href="/blog/react_to_nextjs">
-                <a className={`neutralize-link`}>
-                    <h2>Converting a React application with Redux and Apollo to Next.JS</h2>
-                </a>
-            </Link>
+                {blogs.map(item => 
+                    <BlogPost 
+                        key={item.id} 
+                        title={item.title} 
+                        description={item.description}
+                        link={item.link}
+                        image={item.image}
+                        author={item.author}
+                        date={item.date}
+                    />
+                )}
         </Layout>
     )
 }
