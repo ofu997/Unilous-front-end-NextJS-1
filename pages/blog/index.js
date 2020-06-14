@@ -21,7 +21,7 @@ const BlogIndex = () => {
         <Layout>
             <Head>
                 <title>Blog | Unilous</title>
-                <meta name="description" content="Contact the Unilous team" key="description"/>
+                <meta name="description" content="Blogs made by teams, for all." key="description"/>
             </Head>
             <div className="navbar-height" />
                 {blogs.map(item => 

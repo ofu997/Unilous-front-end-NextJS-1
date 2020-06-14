@@ -24,19 +24,7 @@
     "/_polyfills": [
       "static/runtime/polyfills.js"
     ],
-    "/blog": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/blog/react_to_nextjs": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/index": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
-    "/user/[username]": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]
