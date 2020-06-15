@@ -86,6 +86,7 @@ const HomePage = (props) => {
             </Head>
             <div className="navbar-height" />
             <div className={HP.wrapper} style={{backgroundColor: '#282828'}}>
+                <img className={HP.starsSVG} src="/svg/stars.svg"/>
                 <div className={HP.rowContainer} style={{color: 'white'}}>
                     <div className={`${HP.textBox} ${HP.narrow}`}>
                         <h1 className={HP.leftAlign}>Build your team, create your project</h1>
@@ -106,8 +107,11 @@ const HomePage = (props) => {
             </div>
             <div id="CAPCard" className={HP.wrapper}>
                 <div className={HP.rowContainer} >
-                    <div  className={HP.card} style={{justifySelf: 'end'}}>
-                        <h2 className={HP.leftAlign}>Create a project</h2>
+                    <div className={HP.card} style={{justifySelf: 'end'}}>
+                        <div>
+                            <img className={HP.iconTopLeft} src="/svg/rocket.svg"/>
+                            <h2 className={HP.leftAlign}>Create a project</h2>
+                        </div>
                         <div className={HP.lgPara}>The project serves as the vehicle of Unilous as it is the method to which the team is built. Projects are automatically displayed on our results page where they are <Link href="/"><a className={HP.linkDark} style={{opacity: 1}}>ordered on effectiveness and time of posting</a></Link>. We  provide you with all of the necessary features to pitch your project in an attractive way all the while containing all of the necessary information the user would want.</div>
                         <ol className={HP.cardList}>
                             <li style={colorsForCP[0]} className={HP.cardListItem}>Sign in or Register</li>
@@ -118,7 +122,10 @@ const HomePage = (props) => {
                         {buttonsForCP[positionInCP]}
                     </div>
                     <div className={HP.card} style={{justifySelf: 'start'}}>
-                        <h2 className={HP.leftAlign}>Join a project</h2>
+                        <div>
+                            <img className={HP.iconTopLeft} src="/svg/astronaut.svg"/>
+                            <h2 className={HP.leftAlign}>Join a project</h2>
+                        </div>
                         <div className={HP.lgPara}>While the project is the vehicle of Unilous, its users make it move. Many of the projects posted are rough ideas on what it could be, by joining a project we encourage that the users joining work side by side with the creator to imagine something better. We offer a variety of projects ranging all fields and interests as Unilous was built with everyone in mind. Unilous has made its project joining process as <Link href="/"><a className={HP.linkDark} style={{opacity: 1}}>simple as it can be</a></Link>.</div>
                         <ol className={HP.cardList}>
                             <li style={colorsForJP[0]} className={HP.cardListItem}>Sign in or Register</li>
@@ -133,8 +140,11 @@ const HomePage = (props) => {
             </div>
             <div className={HP.wrapper}>
                 <div id='community' className={`${HP.rowContainer} ${HP.communityOrProjectsDiv}`}>
-                    <div className={`${HP.textBox} ${HP.narrow}`}>            
-                        <h2 className={HP.leftAlign}>Network</h2>
+                    <div className={`${HP.textBox} ${HP.narrow}`}>  
+                        <div>
+                            <img className={HP.iconTopLeft} src="/svg/astronaut.svg"/>         
+                            <h2 className={HP.leftAlign}>Network</h2>
+                        </div>
                         <p className={HP.lgPara}>
                         Unilous does the networking so you don't need to. We provide you with access to all of our talented users by directly browsing our users or indirectly posting projects for all of the potentially interested users to see. The Unilous community although with different interests and skill sets are all looking to create and be part of something great.
                         </p>
@@ -158,8 +168,11 @@ const HomePage = (props) => {
             </div>
             <div className={HP.wrapper}>
                 <div id='projects' className={`${HP.rowContainer} ${HP.communityOrProjectsDiv}`}>
-                    <div className={`${HP.textBox} ${HP.narrow}`}>       
-                        <h2 className={HP.leftAlign}>Projects</h2>
+                    <div className={`${HP.textBox} ${HP.narrow}`}>  
+                        <div>
+                            <img className={HP.iconTopLeft} src="/svg/rocket.svg"/>    
+                            <h2 className={HP.leftAlign}>Projects</h2>
+                        </div> 
                         <p className={HP.lgPara}>
                             Unilus contains many different kinds of projects with all kinds of skills needed. Although they have different complexities and different skill requirements, all of them need a team. Project Unilous for example is also on display welcoming new members interested in contributing to it.
                         </p>

@@ -162,6 +162,7 @@
 .narrow {
   width: 70%;
 }
+
 @media only screen and (max-width: 800px) {
   .narrow {
     width: 90%;
@@ -266,3 +267,33 @@
   justify-content: end;
   color: white;
 }
+
+/*----------------------------*/
+/*-------- JEFF'S CSS ------- */
+/*----------------------------*/
+.rowContainer {
+  z-index: 1;
+}
+
+.starsSVG {
+  position: absolute;
+  left: 0;
+  max-height: 100%;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+.leftAlign {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.iconTopLeft {
+  display: inline-block;
+  vertical-align: middle;
+  height: 30px;
+  margin-right: 7px;
+}
+/*----------------------------*/
+/*-------- JEFF'S CSS ------- */
+/*----------------------------*/
