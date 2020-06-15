@@ -164,7 +164,7 @@ const Notif = (props) => {
                 )
             }
             else {
-                const skillToJoin = notif.post.skillNames[notif.proposedContribution.indexOf(1)]
+                const skillToJoin = notif.proposedContribution ? notif.post.skillNames[notif.proposedContribution.indexOf(1)] : 'Missing'
                 return (
                     <div className="n-notif-container" style={{borderBottom: `5px solid ${notifStatusColor}`}}>
                         <h3 className="n-notif-header" style={{backgroundColor: notifStatusColor}}>sent join request</h3>
@@ -331,7 +331,7 @@ const Notif = (props) => {
                 )
             }
             else {
-                const skillToJoin = notif.post.skillNames[notif.proposedContribution.indexOf(1)]
+                const skillToJoin = notif.proposedContribution ? notif.post.skillNames[notif.proposedContribution.indexOf(1)] : 'Missing'
                 return (
                     <div className="n-notif-container" style={{borderBottom: `5px solid ${notifStatusColor}`}}>
                         <h3 className="n-notif-header" style={{backgroundColor: notifStatusColor}}>recieved join request</h3>

@@ -1,5 +1,6 @@
 import { gql } from 'apollo-boost'
 
+// query listOfNotifications($notifications: [ID!]) {
 export const LIST_OF_NOTIFICATIONS = gql`
   query listOfNotifications($notifications: [String!]) {
     listOfNotifications(notifications: $notifications) {
@@ -75,7 +76,7 @@ export const ME = gql`
     }
   }
 `
-
+// query getListOfPosts($id_list: [ID!]) {
 export const LIST_OF_POSTS = gql`
   query getListOfPosts($id_list: [String]) {
     getListOfPosts(idList: $id_list){
