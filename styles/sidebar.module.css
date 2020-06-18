@@ -1,0 +1,30 @@
+.container {
+  align-items: flex-start;
+  justify-content: start;
+  text-align: left;
+}
+
+.userInformation {
+  height: 20vh;
+  background-color: ghostwhite;
+}
+
+.userInformation p {
+  display: inline;
+}
+
+.userInformation a {
+  display: inline;
+}
+
+.ProjectsAndUsers {
+  height: 70vh;
+  background-color: whitesmoke;
+  padding-left: 5%;;
+}
+
+.ProjectsAndUsers p {
+  margin: 5% auto;
+  text-align: left;
+  font-size: 1.5em;
+}

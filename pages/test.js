@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import Layout from '../components/Layout'
-import Head from 'next/head'
+import Sidebar from '../components/Sidebar'
 import UploadImage from '../components/UploadImage'
+import T from '../styles/test.module.css'
 
 const Test = () => {
     const [imageURL, setImageURL] = useState(null)
@@ -18,12 +19,17 @@ const Test = () => {
     
     return (
         <Layout>
-            <div className="navbar-height" />
-            <h1 className="testt">test</h1>
-            <div style={{width: '300px', height: '300px'}}>
-                {showUploadImage}
+            <div className={T.UPContainsAll}>
+                <div className={T.UPSidebar}>
+                    <Sidebar />
+                </div>
+                <div className="navbar-height" />
+                <h1 className="testt">test</h1>
+                <div style={{width: '300px', height: '300px'}}>
+                    {showUploadImage}
+                </div>
+                <br />
             </div>
-            <br />
         </Layout>
     )
 }
