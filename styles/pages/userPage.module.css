@@ -1,9 +1,9 @@
-.UPContainer {
+/* .UPContainer {
     width: 80%;
     margin: auto;
     display: grid;
     grid-template-columns: 65% 35%;
-}
+} */
 @media only screen and (max-width: 800px) {
     .UPContainer {
         width: 95%;
@@ -71,4 +71,33 @@
 
 .test {
     background-color: palegreen;
+}
+
+.UPContainsAll {
+    display: flex;
+    align-items: flex-start;
+    /* grid-template-columns: 10% 90%; */
+    /* min-height: 100%; */
+}
+
+.UPContainer {
+    /* align-items: start; */
+    /* align-content: start; */
+    width: 80%;
+    /* margin: auto; */
+    display: flex;
+    /* grid-template-columns: 65% 35%; */
+    /* min-height: 100%; */
+    /* height: calc(100vh-49px); */
+}
+
+.UPSidebar {
+    width: 10%;
+    display: flex;
+    /* height: calc(100vh-9em); */
+    height: 90vh;
+    /* align-items: center;  */
+    flex-direction: column;
+    margin-top: 49px;
+    /* justify-items: left; */
 }

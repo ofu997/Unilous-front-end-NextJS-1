@@ -11,7 +11,9 @@
 .UPSidebar {
   width: 20%;
   display: flex;
-  height: 90vh;
+  /* height is the same with 90vh or calc(100vh-49px)*/
+  /* height: 90vh; */
+  height: calc(100vh - 49px);
   flex-direction: column;
   margin-top: 49px;
 }

@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from 'react'
+import { useMutation } from '@apollo/react-hooks'
+import Head from 'next/head'
+import { withRouter } from 'next/router'
+import React from 'react'
 import { connect } from 'react-redux'
-import { useQuery, useMutation } from '@apollo/react-hooks'
-import { MAKE_NOTIFICATION } from '../../schemas/mutations'
-import { FIND_USER, ALL_USERS, LIST_OF_POSTS } from '../../schemas/queries'
-import { setAlert, resetAlert } from '../../redux/reducers/alertNotif'
-import UP from '../../styles/pages/userPage.module.css';
+import { bindActionCreators } from 'redux'
+import Layout from '../../components/Layout'
 import PostSmallList from '../../components/post/PostSmallList'
-import Loading from '../../components/Loading'
+import Sidebar from '../../components/Sidebar'
 import FormContainer from '../../components/text-field/FormContainer'
 import ReferenceLink from '../../components/text-field/ReferenceLink'
-import { palletteGenerator, useField, triggerAlert } from '../../functions/functions'
-import {bindActionCreators} from 'redux'
-import {apolloClient} from '../../lib/apollo'
-import {withRouter} from 'next/router'
-import Link from 'next/link'
-import Layout from '../../components/Layout'
-import Head from 'next/head'
+import { palletteGenerator, triggerAlert, useField } from '../../functions/functions'
+import { apolloClient } from '../../lib/apollo'
+import { resetAlert, setAlert } from '../../redux/reducers/alertNotif'
+import { MAKE_NOTIFICATION } from '../../schemas/mutations'
+import { ALL_USERS, FIND_USER, LIST_OF_POSTS } from '../../schemas/queries'
+import UP from '../../styles/pages/userPage.module.css'
 
 const UserPage = withRouter((props) => {
   const currentUser = props.user
@@ -65,33 +64,40 @@ const UserPage = withRouter((props) => {
         <title>{`${currentUser.username} | Unilous user`}</title>
         <meta name="description" content={descriptionToShow()} key="description" />
       </Head>
-      <div className={UP.UPContainer}>
-        <div className="navbar-height" style={{gridColumn: '1/3'}} />
-        <div className={UP.UPContent}>
-          <div className={UP.UPTitleContainer}>
-            <img className={UP.UPTitleIcon} src="/svg/userB.svg" alt="user" />
-            <h2 className={UP.UPTitle}>{currentUser.username}</h2>
-          </div>
-          <h3 className={UP.UPTitle} style={{opacity: '0.8'}}>profile link</h3>
-          <ReferenceLink rl={currentUser.referenceLink} />
-          <h2 className={UP.UPTitle}>posts</h2>
-          <div className={UP.UPPostsContainer}>
-            <PostSmallList posts={props.userPosts} />
-          </div>
+      <div className={UP.UPContainsAll} style={{ border: '2px solid gold' }}>
+        <div className={UP.UPSidebar} style={{ border: '2px solid orange' }} >
+          {/* <p style={{ border: '2px solid green' }}>i'm the sidebar</p> */}
+          {/* , marginTop: '300px'}} */}
+          <Sidebar/>
         </div>
-        { props.currentUser !== currentUser.username &&
-        <FormContainer pallette={pallette} >
-              <h3 className="form-title">contact {currentUser.username}</h3>
-              <h4 className="form-title-secondary">message</h4>
-              <div className="form-field-container">
-                <textarea className="form-field" {...message.fields} />
-              </div >
-              <div className="form-submit-button-container">
-                
-              <h4 onClick={() => handleMessage()} className="form-submit-button">send</h4>
-              </div>
-        </FormContainer>
-        }
+        <div className={UP.UPContainer} style={{ border: '2px solid purple'}}>
+          <div className="navbar-height" style={{gridColumn: '1/3'}} />
+          <div className={UP.UPContent} style={{width: '65%'}}>
+            <div className={UP.UPTitleContainer}>
+              <img className={UP.UPTitleIcon} src="/svg/userB.svg" alt="user" />
+              <h2 className={UP.UPTitle}>{currentUser.username}</h2>
+            </div>
+            <h3 className={UP.UPTitle} style={{opacity: '0.8'}}>profile link</h3>
+            <ReferenceLink rl={currentUser.referenceLink} />
+            <h2 className={UP.UPTitle}>posts</h2>
+            <div className={UP.UPPostsContainer}>
+              <PostSmallList posts={props.userPosts} />
+            </div>
+          </div>
+          { props.currentUser !== currentUser.username &&
+          <FormContainer pallette={pallette} style={{ width: '35%'}}>
+                <h3 className="form-title">contact {currentUser.username}</h3>
+                <h4 className="form-title-secondary">message</h4>
+                <div className="form-field-container">
+                  <textarea className="form-field" {...message.fields} />
+                </div >
+                <div className="form-submit-button-container">
+                  
+                <h4 onClick={() => handleMessage()} className="form-submit-button">send</h4>
+                </div>
+          </FormContainer>
+          }
+        </div>
       </div>
     </Layout>
   )

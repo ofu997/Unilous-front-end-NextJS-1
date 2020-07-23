@@ -1,16 +1,27 @@
 .container {
-  align-items: flex-start;
-  justify-content: start;
-  text-align: left;
+  background-color: #17223b;
+  color: white;
 }
 
 .userInformation {
-  height: 20vh;
-  background-color: ghostwhite;
+  display: block;
+  margin: auto;
+  width: 50%;
+  height: 0;
+  padding-bottom: 50%;
 }
 
-.userInformation p {
-  display: inline;
+.profilePic {
+  display: block;
+  margin: auto;
+  width: 100px;
+  height: 100px;
+}
+
+.userInformation p{
+  display: block;
+  margin: 20px auto;
+  text-align: center;
 }
 
 .userInformation a {
@@ -19,8 +30,8 @@
 
 .ProjectsAndUsers {
   height: 70vh;
-  background-color: whitesmoke;
-  padding-left: 5%;;
+  padding-left: 5%;
+  background-color: #2e384e;
 }
 
 .ProjectsAndUsers p {
